@@ -6,11 +6,11 @@ import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 
 const INITIAL_MESSAGE = {
-  text: "Hi there! 👋 How can I help you today?",
+  text: "비블로와 관련하여 궁금하신 점이 있으시면 편하게 질문해 주세요 👋 ",
   isUser: false,
 };
 
-const ChatMessage = ({ message, isUser, isLoading }) => (
+const ChatMessage = ({ message, isUser, isLoading, messageId, onFeedback, feedback }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -71,6 +71,34 @@ const ChatMessage = ({ message, isUser, isLoading }) => (
             message
           )}
         </p>
+        
+        {/* 피드백 버튼 (AI 응답에만 표시) */}
+        {!isUser && messageId && onFeedback && (
+          <div className={`flex justify-end mt-2 gap-2 ${feedback !== null ? 'opacity-50' : 'opacity-100'}`}>
+            <button 
+              onClick={() => onFeedback(messageId, 1)}
+              disabled={feedback !== null}
+              className={`text-xs px-2 py-1 rounded ${
+                feedback === 1 
+                  ? 'bg-[#5967B5] text-white' 
+                  : 'bg-white/70 text-[#5967B5] hover:bg-[#5967B5]/10'
+              } transition-colors disabled:cursor-not-allowed`}
+            >
+              👍 Like
+            </button>
+            <button 
+              onClick={() => onFeedback(messageId, 0)}
+              disabled={feedback !== null}
+              className={`text-xs px-2 py-1 rounded ${
+                feedback === 0 
+                  ? 'bg-[#5967B5] text-white' 
+                  : 'bg-white/70 text-[#5967B5] hover:bg-[#5967B5]/10'
+              } transition-colors disabled:cursor-not-allowed`}
+            >
+              👎 Dislike
+            </button>
+          </div>
+        )}
       </div>
     </div>
   </motion.div>
@@ -86,78 +114,321 @@ const Chat = () => {
   });
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [sessionId, setSessionId] = useState(null);
+  const [streamingResponse, setStreamingResponse] = useState("");
+  const [currentStreamingMessageId, setCurrentStreamingMessageId] = useState(null);
+  
   const chatContainerRef = useRef(null);
   const inputRef = useRef(null);
-
+  const webSocketRef = useRef(null);
+  const streamWebSocketRef = useRef(null);
+  const pingIntervalRef = useRef(null);
+  const userInfoCalledRef = useRef(false);
+  
+  // 컴포넌트 마운트 시 실행
+  useEffect(() => {
+    // 세션 ID 로드
+    const savedSessionId = localStorage.getItem("sessionId");
+    if (savedSessionId) {
+      setSessionId(savedSessionId);
+    }
+    
+    // 컴포넌트 언마운트 시 웹소켓 정리
+    return () => {
+      disconnectWebSocket();
+      disconnectStreamWebSocket();
+    };
+  }, []);
+  
+  // sessionId가 변경될 때 /extract_user_info API를 최초 1회 호출
+  useEffect(() => {
+    if (sessionId && !userInfoCalledRef.current) {
+      fetch("http://localhost:8000/extract_user_info", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ session_id: sessionId })
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("User info updated:", data);
+        })
+        .catch((error) => {
+          console.error("Error updating user info:", error);
+        });
+      userInfoCalledRef.current = true;
+      
+      // 세션 ID 저장
+      localStorage.setItem("sessionId", sessionId);
+    }
+  }, [sessionId]);
+  
+  // 세션 ID가 변경될 때 웹소켓 연결
+  useEffect(() => {
+    if (sessionId) {
+      connectWebSocket(sessionId);
+      
+      // 페이지 언로드 시 세션 종료 처리
+      const handleUnload = () => {
+        disconnectWebSocket();
+        disconnectStreamWebSocket();
+        if (sessionId) {
+          // 동기적으로 세션 종료 요청 (비콘 API 사용)
+          navigator.sendBeacon(
+            "http://localhost:8000/end_session",
+            JSON.stringify({ session_id: sessionId })
+          );
+        }
+      };
+      
+      window.addEventListener('beforeunload', handleUnload);
+      return () => {
+        window.removeEventListener('beforeunload', handleUnload);
+      };
+    }
+  }, [sessionId]);
+  
+  // 채팅 기록이 업데이트될 때마다 스크롤을 아래로 이동
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages, streamingResponse]);
+  
   // Save messages to localStorage whenever they change
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("chatMessages", JSON.stringify(messages));
     }
   }, [messages]);
-
-  const startNewChat = () => {
+  
+  // 웹소켓 연결 함수
+  const connectWebSocket = (sid) => {
+    // 기존 웹소켓이 있으면 정리
+    disconnectWebSocket();
+    
+    // 새 웹소켓 연결
+    const ws = new WebSocket(`ws://localhost:8000/ws/${sid}`);
+    
+    ws.onopen = () => {
+      console.log("WebSocket 연결 성공:", sid);
+      
+      // 연결 유지를 위한 ping 메시지 전송 (30초마다)
+      pingIntervalRef.current = setInterval(() => {
+        if (ws.readyState === WebSocket.OPEN) {
+          ws.send("ping");
+        }
+      }, 30000);
+    };
+    
+    ws.onclose = () => {
+      console.log("WebSocket 연결 종료");
+      clearInterval(pingIntervalRef.current);
+    };
+    
+    ws.onerror = (error) => {
+      console.error("WebSocket 오류:", error);
+    };
+    
+    // 웹소켓 참조 저장
+    webSocketRef.current = ws;
+  };
+  
+  // 스트리밍 웹소켓 연결 함수
+  const connectStreamWebSocket = (userPrompt) => {
+    disconnectStreamWebSocket();
+    
+    const ws = new WebSocket('ws://localhost:8000/stream');
+    
+    ws.onopen = () => {
+      console.log("스트리밍 WebSocket 연결 성공");
+      // 연결 후 메시지 전송
+      ws.send(JSON.stringify({
+        prompt: userPrompt,
+        session_id: sessionId
+      }));
+      
+      // 스트리밍 응답 초기화
+      setStreamingResponse("");
+      setIsLoading(true);
+    };
+    
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      
+      if (data.type === "session_info") {
+        // 세션 정보 처리
+        setSessionId(data.session_id);
+      }
+      else if (data.type === "message_start") {
+        // 메시지 시작 처리 - ID 저장
+        setCurrentStreamingMessageId(data.message_id);
+        console.log("메시지 ID 설정:", data.message_id);
+      }
+      else if (data.type === "token") {
+        // 토큰 추가
+        setStreamingResponse(prev => prev + data.token);
+      }
+      else if (data.type === "message_end") {
+        // 메시지 완료 처리 - 서버로부터 전달받은 메시지 ID 사용
+        setMessages(prev => [...prev, {
+          text: data.full_response,
+          isUser: false,
+          message_id: data.message_id, // 서버와 동일한 ID 사용
+          feedback: null
+        }]);
+        
+        console.log("메시지 완료, ID:", data.message_id);
+        setStreamingResponse("");
+        setCurrentStreamingMessageId(null);
+        setIsLoading(false);
+        disconnectStreamWebSocket();
+      }
+      else if (data.error) {
+        console.error("스트리밍 오류:", data.error);
+        setIsLoading(false);
+        disconnectStreamWebSocket();
+        
+        // 오류 메시지 표시
+        setMessages(prev => [...prev, {
+          text: "I apologize, but I'm having trouble connecting right now. Please try again later.",
+          isUser: false
+        }]);
+      }
+    };
+    
+    ws.onclose = () => {
+      console.log("스트리밍 WebSocket 연결 종료");
+      if (isLoading) setIsLoading(false);
+    };
+    
+    ws.onerror = (error) => {
+      console.error("스트리밍 WebSocket 오류:", error);
+      setIsLoading(false);
+    };
+    
+    streamWebSocketRef.current = ws;
+  };
+  
+  // 웹소켓 연결 해제 함수
+  const disconnectWebSocket = () => {
+    if (webSocketRef.current) {
+      clearInterval(pingIntervalRef.current);
+      webSocketRef.current.close();
+      webSocketRef.current = null;
+    }
+  };
+  
+  // 스트리밍 웹소켓 연결 해제 함수
+  const disconnectStreamWebSocket = () => {
+    if (streamWebSocketRef.current) {
+      streamWebSocketRef.current.close();
+      streamWebSocketRef.current = null;
+    }
+  };
+  
+  // 명시적 세션 종료 및 채팅 초기화
+  const startNewChat = async () => {
+    // 기존 세션 종료
+    if (sessionId) {
+      try {
+        await fetch("http://localhost:8000/end_session", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ session_id: sessionId })
+        });
+        
+        // 웹소켓 및 세션 정리
+        disconnectWebSocket();
+        disconnectStreamWebSocket();
+        
+        console.log("세션이 종료되었습니다.");
+      } catch (error) {
+        console.error("세션 종료 오류:", error);
+      }
+    }
+    
+    // 상태 초기화
+    setSessionId(null);
     setMessages([INITIAL_MESSAGE]);
-    localStorage.removeItem("chatMessages");
+    setStreamingResponse("");
     setInputValue("");
+    userInfoCalledRef.current = false;
+    
+    // 로컬 스토리지 정리
+    localStorage.removeItem("chatMessages");
+    localStorage.removeItem("sessionId");
+    
+    // 입력 포커스
     if (inputRef.current) {
       inputRef.current.focus();
     }
   };
-
-  const handleSendMessage = async (e) => {
+  
+  // 폼 제출 핸들러
+  const handleSendMessage = (e) => {
     e.preventDefault();
     if (!inputValue.trim() || isLoading) return;
-
-    const userMessage = { text: inputValue, isUser: true };
-    setMessages((prev) => [...prev, userMessage]);
+    
+    // 사용자 메시지를 대화 기록에 추가
+    const userMessage = inputValue;
+    setMessages(prev => [...prev, { text: userMessage, isUser: true }]);
     setInputValue("");
-    setIsLoading(true);
-
+    
+    // WebSocket 스트리밍 방식 사용
+    connectStreamWebSocket(userMessage);
+  };
+  
+  // 피드백 제출 핸들러
+  const handleFeedback = async (messageId, feedbackValue) => {
+    if (!sessionId || !messageId) return;
+    
+    console.log(`피드백 제출: 메시지 ID ${messageId}, 값 ${feedbackValue}`);
+    
     try {
-      // Get last 10 messages for context
-      const lastMessages = [...messages, userMessage].slice(-10);
-
-      const response = await fetch("/api/chat", {
+      // 피드백 UI 업데이트 (낙관적 업데이트)
+      setMessages(prev => 
+        prev.map(msg => 
+          msg.message_id === messageId 
+            ? { ...msg, feedback: feedbackValue } 
+            : msg
+        )
+      );
+      
+      // 피드백 API 호출
+      const response = await fetch("http://localhost:8000/feedback", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          messages: lastMessages,
-        }),
+          session_id: sessionId,
+          message_id: messageId,
+          feedback_value: feedbackValue
+        })
       });
-
+      
       if (!response.ok) {
-        throw new Error("Failed to get response");
+        throw new Error("피드백 제출에 실패했습니다.");
       }
-
-      const data = await response.json();
-      setMessages((prev) => [...prev, { text: data.message, isUser: false }]);
+      
+      const result = await response.json();
+      console.log("피드백 제출 성공:", result);
     } catch (error) {
-      console.error("Error:", error);
-      setMessages((prev) => [
-        ...prev,
-        {
-          text: "I apologize, but I'm having trouble connecting right now. Please try again later.",
-          isUser: false,
-        },
-      ]);
-    } finally {
-      setIsLoading(false);
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
+      console.error("피드백 제출 오류:", error);
+      
+      // 오류 시 피드백 UI 롤백
+      setMessages(prev => 
+        prev.map(msg => 
+          msg.message_id === messageId 
+            ? { ...msg, feedback: null } 
+            : msg
+        )
+      );
     }
   };
-
-  useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
-    }
-  }, [messages]);
-
+  
   // Prevent scroll propagation
   const handleWheel = (e) => {
     const container = chatContainerRef.current;
@@ -182,12 +453,21 @@ const Chat = () => {
       <main className="overflow-hidden">
         <div className="min-h-screen bg-[url('/bg2.png')] bg-cover bg-center bg-no-repeat py-24 sm:py-24 md:py-32 px-2 sm:px-4">
           <div className="max-w-4xl mx-auto h-[calc(100vh-8rem)] sm:min-h-[500px]">
-            <button
-              onClick={startNewChat}
-              className="bg-white text-[#5967B5] border border-[#5967B5]/20 px-6 py-2.5 rounded-full font-medium hover:bg-[#5967B5]/5 transition-colors mx-auto mb-4"
-            >
-              Start New Chat
-            </button>
+            <div className="flex justify-between items-center mb-4">
+              <button
+                onClick={startNewChat}
+                className="bg-white text-[#5967B5] border border-[#5967B5]/20 px-6 py-2.5 rounded-full font-medium hover:bg-[#5967B5]/5 transition-colors"
+              >
+                Start New Chat
+              </button>
+              
+              {sessionId && (
+                <div className="text-xs text-[#5967B5]/70 bg-white/50 px-3 py-1 rounded-full">
+                  Session: {sessionId.substring(0, 8)}...
+                </div>
+              )}
+            </div>
+            
             <div className="bg-white/30 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg overflow-hidden mx-auto max-w-[98%] sm:max-w-full h-[calc(100vh-16rem)] sm:h-auto">
               <div
                 ref={chatContainerRef}
@@ -200,15 +480,29 @@ const Chat = () => {
                     key={index}
                     message={message.text}
                     isUser={message.isUser}
-                    isLoading={
-                      isLoading &&
-                      index === messages.length - 1 &&
-                      !message.isUser
-                    }
+                    isLoading={false}
+                    messageId={message.message_id}
+                    feedback={message.feedback}
+                    onFeedback={!message.isUser ? handleFeedback : undefined}
                   />
                 ))}
-                {isLoading && (
-                  <ChatMessage message="" isUser={false} isLoading={true} />
+                
+                {/* 스트리밍 응답 표시 */}
+                {streamingResponse && (
+                  <ChatMessage 
+                    message={streamingResponse} 
+                    isUser={false} 
+                    isLoading={false}
+                  />
+                )}
+                
+                {/* 로딩 표시 (스트리밍 없을 때) */}
+                {isLoading && !streamingResponse && (
+                  <ChatMessage 
+                    message="" 
+                    isUser={false} 
+                    isLoading={true}
+                  />
                 )}
               </div>
 
@@ -228,14 +522,14 @@ const Chat = () => {
                   />
                   <button
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isLoading || !inputValue.trim()}
                     className="hidden sm:block bg-[#5967B5] text-white px-6 py-2.5 rounded-full font-medium hover:bg-[#4A579E] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Send
                   </button>
                   <button
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isLoading || !inputValue.trim()}
                     className="sm:hidden px-4 bg-[#5967B5] text-white rounded-full hover:bg-[#4A579E] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <svg
