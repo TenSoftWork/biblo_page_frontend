@@ -24,4 +24,6 @@ jobs:
       
       - name: Trigger jenkins Deployment
         run: |
-          curl -X POST "http://112.219.163.139:8080/job/biblo_frontend/build?token=111e7e952b6233a6fe96674f5e36e27ec8"
+          curl -X POST "http://112.219.163.139:8080/job/biblo_frontend/build?token=111e7e952b6233a6fe96674f5e36e27ec8" \
+          -H "Jenkins-Crumb: 8e15b7ee093496da0206524b84410ec5efe6f37b73cc7726604a3af943239d1f" \
+          -u tsw_jenkins:111e7e952b6233a6fe96674f5e36e27ec8
