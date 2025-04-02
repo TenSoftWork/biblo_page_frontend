@@ -21,3 +21,7 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-frontend:latest .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-frontend:latest
+      
+      - name: Trigger jenkins Deployment
+        run: |
+          curl -X POST "http://112.219.163.139:8080/job/biblo_frontend/build?token=biblo_homepage"
