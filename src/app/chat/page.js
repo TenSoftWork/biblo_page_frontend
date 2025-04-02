@@ -125,6 +125,15 @@ const Chat = () => {
   const pingIntervalRef = useRef(null);
   const userInfoCalledRef = useRef(false);
   
+  // API 기본 URL 정의 (상대 경로 사용)
+  const API_BASE_URL = '';
+  
+  // WebSocket URL 생성 함수 (프로토콜 자동 감지)
+  const getWebSocketUrl = (path) => {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    return `${protocol}//${window.location.host}${path}`;
+  };
+  
   // 컴포넌트 마운트 시 실행
   useEffect(() => {
     // 세션 ID 로드
@@ -143,7 +152,7 @@ const Chat = () => {
   // sessionId가 변경될 때 /extract_user_info API를 최초 1회 호출
   useEffect(() => {
     if (sessionId && !userInfoCalledRef.current) {
-      fetch("http://localhost:8000/extract_user_info", {
+      fetch(`${API_BASE_URL}/extract_user_info`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ session_id: sessionId })
@@ -174,7 +183,7 @@ const Chat = () => {
         if (sessionId) {
           // 동기적으로 세션 종료 요청 (비콘 API 사용)
           navigator.sendBeacon(
-            "http://localhost:8000/end_session",
+            `${API_BASE_URL}/end_session`,
             JSON.stringify({ session_id: sessionId })
           );
         }
@@ -207,7 +216,7 @@ const Chat = () => {
     disconnectWebSocket();
     
     // 새 웹소켓 연결
-    const ws = new WebSocket(`ws://localhost:8000/ws/${sid}`);
+    const ws = new WebSocket(getWebSocketUrl(`/ws/${sid}`));
     
     ws.onopen = () => {
       console.log("WebSocket 연결 성공:", sid);
@@ -237,7 +246,7 @@ const Chat = () => {
   const connectStreamWebSocket = (userPrompt) => {
     disconnectStreamWebSocket();
     
-    const ws = new WebSocket('ws://localhost:8000/stream');
+    const ws = new WebSocket(getWebSocketUrl('/stream'));
     
     ws.onopen = () => {
       console.log("스트리밍 WebSocket 연결 성공");
@@ -331,7 +340,7 @@ const Chat = () => {
     // 기존 세션 종료
     if (sessionId) {
       try {
-        await fetch("http://localhost:8000/end_session", {
+        await fetch(`${API_BASE_URL}/end_session`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -397,7 +406,7 @@ const Chat = () => {
       );
       
       // 피드백 API 호출
-      const response = await fetch("http://localhost:8000/feedback", {
+      const response = await fetch(`${API_BASE_URL}/feedback`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
