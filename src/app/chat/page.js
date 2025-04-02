@@ -6,7 +6,7 @@ import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 
 const INITIAL_MESSAGE = {
-  text: "비블로와 관련하여 궁금하신 점이 있으시면 편하게 질문해 주세요 👋 ",
+  text: "비블로와 관련하여 궁금하신 점이 있으시면 편하게 질문해 주세요 👋",
   isUser: false,
 };
 
