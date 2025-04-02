@@ -15,8 +15,11 @@ RUN npm ci --only=production
 # Next.js 빌드 결과물 복사
 COPY --from=build /app/.next ./.next
 COPY --from=build /app/public ./public
-# 필요한 경우 next.config.js도 복사
-COPY --from=build /app/next.config.js ./
+# 중요 설정 파일들 복사
+COPY --from=build /app/next.config.mjs ./
+COPY --from=build /app/jsconfig.json ./
+COPY --from=build /app/postcss.config.mjs ./
+COPY --from=build /app/eslint.config.mjs ./
 EXPOSE 3000
 # Next.js 실행
 CMD ["npm", "start"]
