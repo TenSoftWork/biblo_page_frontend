@@ -11,7 +11,7 @@ import FAQ from "./components/FAQ";
 import ClientInsights from "./components/ClientInsights";
 import Features from "./components/Features";
 import Footer from "./components/Footer";
-
+//test
 export default function Home() {
   return (
     <main className="relative">
