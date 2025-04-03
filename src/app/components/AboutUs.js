@@ -195,20 +195,20 @@ const MobileFounderSlider = ({ founders }) => {
 const AboutUs = () => {
   const founders = [
     {
-      name: "Nathan Karis",
+      name: "김철형 대표",
       role: "CEO",
       image: "/founder_1.png",
       socials: [{ icon: <FaLinkedin size={20} />, url: "#" }],
     },
     {
-      name: "dw.kim",
-      role: "Head of Innovation",
+      name: "김동욱 이사",
+      role: "CFO",
       image: "/founder_2.png",
-      socials: [{ icon: <FaLinkedin size={20} />, url: "#" }],
+      socials: [{ icon: <FaLinkedin size={20} />, url: "https://www.linkedin.com/in/dwkim82/" }],
     },
     {
-      name: "david.kim",
-      role: "Head of Products",
+      name: "김성훈 교수",
+      role: "AI검색연구소장",
       image: "/founder_3.png",
       socials: [],
     },
@@ -230,11 +230,12 @@ const AboutUs = () => {
                 <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent">
                   Meet
                 </span>{" "}
-                <span className="text-[#6A71A8]">the Founders</span>
+                <span className="text-[#6A71A8]">the Leaders</span>
               </h3>
-              <p className="text-[#465478] text-lg max-w-2xl">
-                The minds behind innovative solutions, making tomorrow&apos;s
-                tech today with expertise that shapes the future of business.
+              <p className="text-[#465478] text-lg max-w-2xl break-keep">
+                비블로는 기술과 데이터를 깊이 있게 이해하고 설계하는
+                실무형 전문가들의 리더십 아래,
+                복잡한 현실 문제를 단순하고 실용적인 해법으로 풀어냅니다.
               </p>
             </div>
 
@@ -257,17 +258,16 @@ const AboutUs = () => {
                   <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent">
                     The
                   </span>{" "}
-                  <span className="text-[#6A71A8]">The Story So Far —</span>
+                  <span className="text-[#6A71A8]">Story So Far —</span>
                 </h3>
                 <div className="space-y-6 text-[#465478]">
                   <p className="text-lg lg:text-xl">
-                    Biblo는 연구자와 학습자를 위한 진짜 AI 도서관 에이전트를
-                    만들기 위해 시작됐습니다.
+                    연구자와 학습자만을 위한 맞춤형 AI 에이전트
                   </p>
                   <p className="text-base lg:text-lg">
-                    Biblo는 단순한 도서 검색 도구가 아닙니다.  학생이 무엇을
+                    비블로는 단순한 도서 검색 도구가 아닙니다. 학생이 무엇을
                     찾는지, 어떤 정보를 중요하게 생각하는지를 메타데이터로
-                    분석하고,  대학과 연구기관이 필요한 인사이트를 얻을 수
+                    분석하고, 대학과 연구기관이 필요한 인사이트를 얻을 수
                     있도록 설계된 지능형 학술 에이전트입니다.
                   </p>
                   <p className="text-base lg:text-lg">
@@ -293,12 +293,11 @@ const AboutUs = () => {
                     <PhotoStack />
                   </div>
                   <h4 className="text-xl lg:text-2xl font-medium text-[#6A71A8] mb-3 lg:mb-4">
-                    Life at Rescale
+                    Biblo&apos;s Vision
                   </h4>
                   <p className="text-[#465478] mb-6">
-                    우리는 기록을 지식으로 연결합니다.
+                    기록을 지식으로 연결합니다.
                   </p>
-
                   <AnimatedButton href="/contact#top" variant="secondary">
                     Join Us
                   </AnimatedButton>
