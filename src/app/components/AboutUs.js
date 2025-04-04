@@ -228,14 +228,14 @@ const AboutUs = () => {
             <div className="mb-12 lg:mb-20">
               <h3 className="text-3xl lg:text-6xl font-medium mb-4 lg:mb-6">
                 <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent">
-                  Meet
+                  Our
                 </span>{" "}
-                <span className="text-[#6A71A8]">the Leaders</span>
+                <span className="text-[#6A71A8]">Leaders</span>
               </h3>
               <p className="text-[#465478] text-lg max-w-2xl break-keep">
-                비블로는 기술과 데이터를 깊이 있게 이해하고 설계하는
-                실무형 전문가들의 리더십 아래,
-                복잡한 현실 문제를 단순하고 실용적인 해법으로 풀어냅니다.
+                Biblo AI는 기술과 데이터를 깊이 이해하는 실무형 전문가들이 이끄는 팀입니다.
+                복잡한 학습 및 연구 분야의 문제를, AI를 통해 단순하고 실용적인 솔루션으로 전환합니다.
+                우리는 사용자의 실제 문제를 중심에 두고, 기술이 현실에 바로 적용될 수 있도록 설계합니다.
               </p>
             </div>
 
@@ -256,34 +256,28 @@ const AboutUs = () => {
               <div className="w-full lg:w-[70%]">
                 <h3 className="text-4xl lg:text-6xl font-medium mb-8 lg:mb-12">
                   <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent">
-                    The
+                    Biblo,
                   </span>{" "}
-                  <span className="text-[#6A71A8]">Story So Far —</span>
+                  <span className="text-[#6A71A8]">Explained —</span>
                 </h3>
                 <div className="space-y-6 text-[#465478]">
                   <p className="text-lg lg:text-xl">
-                    연구자와 학습자만을 위한 맞춤형 AI 에이전트
+                    연구자와 학습자를 위한 맞춤형 AI 에이전트
                   </p>
-                  <p className="text-base lg:text-lg">
-                    비블로는 단순한 도서 검색 도구가 아닙니다. 학생이 무엇을
-                    찾는지, 어떤 정보를 중요하게 생각하는지를 메타데이터로
-                    분석하고, 대학과 연구기관이 필요한 인사이트를 얻을 수
-                    있도록 설계된 지능형 학술 에이전트입니다.
+                  <p className="text-base lg:text-lg mb-10">
+                    비블로(Biblo)는 Biblo AI가 개발한, 연구자와 학습자를 위한 AI 기반 정보 분석 에이전트입니다.
+                    검색 데이터를 넘어 학습 행동을 분석하고, 대학과 기관에 전략적 인사이트를 제공합니다.
+                    축적된 메타데이터를 기반으로 학술 정보 활용 방식을 혁신하며, 보다 나은 학습과 연구 환경을 만들어갑니다.
                   </p>
-                  <p className="text-base lg:text-lg">
-                    비블로는 다음과 같은 핵심 가치로 설계되었습니다:
+                  <p className="text-base lg:text-xl">
+                    비블로(Biblo)의 핵심 기능
                   </p>
                   <ul className="list-disc pl-6 space-y-3 text-base lg:text-lg text-[#465478]">
-                    <li>정확하고 신뢰할 수 있는 AI 검색 (Biblo Search)</li>
-                    <li>논문 요약 및 연구 홍보 CMS (Biblo Scholar)</li>
-                    <li>학습 행동 기반 개인화 추천 시스템</li>
-                    <li>
-                      대학별 서버에 설치 가능한 On-Premise 모델로 보안과 독립성
-                      확보
-                    </li>
-                    <li>
-                      사용자 메타데이터 분석을 통한 커리큘럼 개선 및 연구 지원
-                    </li>
+                    <li>정확한 AI 검색 – 신뢰도 높은 학술 정보 탐색</li>
+                    <li>논문 요약 CMS – 연구성과 요약 및 홍보</li>
+                    <li>개인화 추천 – 학습 행동 기반 정보 제공</li>
+                    <li>온프레미스 지원 – 보안 강화 및 독립 운영 가능</li>
+                    <li>메타데이터 분석 – 커리큘럼 개선 및 연구 지원</li>
                   </ul>
                 </div>
               </div>
@@ -293,26 +287,28 @@ const AboutUs = () => {
                     <PhotoStack />
                   </div>
                   <h4 className="text-xl lg:text-2xl font-medium text-[#6A71A8] mb-3 lg:mb-4">
-                    Biblo&apos;s Vision
+                    기록을 넘어, 연결로
                   </h4>
-                  <p className="text-[#465478] mb-6">
-                    기록을 지식으로 연결합니다.
+                  <p className="text-[#465478] mb-10">
+                    단순한 기록을 넘어서,
+                    학습과 연구의 흐름 전체를 해석하고
+                    그 속에서 의미 있는 연결을 만들어냅니다.
                   </p>
                   <AnimatedButton href="/contact#top" variant="secondary">
-                    Join Us
+                    Try Biblo
                   </AnimatedButton>
                 </div>
               </div>
             </div>
             {/* CTA */}
-          <div className="max-w-7xl flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 py-8 md:p-8 border-t border-[#6A71A8]/20 mt-8 md:my-20">
+{/*           <div className="max-w-7xl flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 py-8 md:p-8 border-t border-[#6A71A8]/20 mt-8 md:my-20">
               <p className="text-[#6A71A8] text-sm md:text-lg text-center md:text-left w-full md:w-[50%]">
               Discover the full story
               </p>
               <div className="w-full md:w-[40%] text-center md:text-right">
                 <AnimatedButton href="/contact#top">Read More</AnimatedButton>
             </div>
-          </div>
+          </div> */}
           </div>
         </div>
       </div>
