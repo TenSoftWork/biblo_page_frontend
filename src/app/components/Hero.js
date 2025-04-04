@@ -97,7 +97,7 @@ const Hero = () => {
                         paddingRight: "2px",
                       }}
                     >
-                      biblo
+                      Biblo
                     </h1>
                     <div className="absolute inset-0 bg-white/30 rounded-[56px] -z-10" />
                   </motion.div>
