@@ -177,19 +177,19 @@ const Chat = () => {
       connectWebSocket(sessionId);
       
       // 페이지 언로드 시 세션 종료 처리
-      // const handleUnload = () => {
-      //   disconnectWebSocket();
-      //   disconnectStreamWebSocket();
-      //   if (sessionId) {
-      //     // 동기적으로 세션 종료 요청 (비콘 API 사용)
-      //     navigator.sendBeacon(
-      //       `${API_BASE_URL}/end_session`,
-      //       JSON.stringify({ session_id: sessionId })
-      //     );
-      //   }
-      // };
+      const handleUnload = () => {
+        disconnectWebSocket();
+        disconnectStreamWebSocket();
+        if (sessionId) {
+          // 동기적으로 세션 종료 요청 (비콘 API 사용)
+          navigator.sendBeacon(
+            `${API_BASE_URL}/end_session`,
+            JSON.stringify({ session_id: sessionId })
+          );
+        }
+      };
       
-      // window.addEventListener('beforeunload', handleUnload);
+      window.addEventListener('beforeunload', handleUnload);
       return () => {
         window.removeEventListener('beforeunload', handleUnload);
       };
