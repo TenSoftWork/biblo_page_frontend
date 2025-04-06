@@ -233,7 +233,7 @@ const AboutUs = () => {
                 <span className="text-[#6A71A8]">the Leadership</span>
               </h3>
               <p className="text-[#465478] text-lg max-w-2xl break-keep mb-4">
-              Biblo AI("비블로에이아이 주식회사")는 도서관을 위한 AI 에이전트 솔루션에 특화된 기술 기업입니다.  
+              Biblo AI(비블로에이아이 주식회사)는 도서관을 위한 AI 에이전트 솔루션에 특화된 기술 기업입니다.  
               정보 분류, 메타데이터 구축, 추천 시스템 등 도서관의 핵심 업무를 자동화해,  
               복잡한 작업을 빠르고 정확하게 수행할 수 있는 실용적인 AI 도구를 제공합니다.
               </p>
