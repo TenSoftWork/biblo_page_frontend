@@ -100,21 +100,23 @@ const WhyDifferent = () => {
   return (
     <section className="pt-16 md:pt-32" id="why-different">
       <div className="flex flex-col md:flex-row items-top">
-        <div className="w-full md:w-[30%] px-4 md:pl-8 mb-8 md:mb-0">
-          <h6 className="text-[#6A71A8] text-sm md:text-base tracking-[0.2em] font-medium mb-3">
-            INTEGRATIONS
-          </h6>
-          <div className="w-10 h-[1px] bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] mb-8 md:mb-12"></div>
+        <div className="w-full md:w-[30%] px-4 md:pl-8 mb-4 md:mb-0">
+          <div className="text-center md:text-left">
+            <h6 className="text-[#6A71A8] text-base tracking-[0.2em] font-medium mb-3">
+              INTEGRATION
+            </h6>
+            <div className="w-10 h-[1px] bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] mx-auto md:mx-0 mb-8 md:mb-12"></div>
+          </div>
         </div>
-        <div className="max-w-7xl flex-1 flex flex-col items-left px-4 md:pr-8">
+        <div className="max-w-7xl flex-1 flex flex-col items-center md:items-start px-4 md:pr-8">
           <div className="max-w-4xl">
             <div className="mb-12 md:mb-20">
-              <h3 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-4 md:mb-6">
-                <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent">
+              <h3 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-4 md:mb-6 text-center md:text-left">
+                <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent text-center md:text-left w-full block">
                   How Biblo is Different
                 </span>
               </h3>
-              <p className="text-[#465478] text-lg max-w-2xl break-keep">
+              <p className="text-[#465478] text-lg max-w-2xl break-keep text-left">
                 비블로(Biblo)는 검색, 분류, 추천, 분석 등  
                 도서관의 다양한 기능을 하나의 AI 에이전트로 통합합니다.  
                 여러 솔루션을 따로 조합하지 않아도,  
@@ -144,7 +146,7 @@ const WhyDifferent = () => {
             {/* Integration Logos */}
             <div className="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-20">
               <div className="w-full md:w-[30%]">
-                <p className="text-[#465478] text-lg max-w-2xl break-keep">
+                <p className="text-[#465478] text-lg max-w-2xl break-keep text-left">
                 검색 기능에 그치지 않고,  
                 분류, 추천, 분석, 도서관 서비스 자동화까지 포함하여  
                 실제 연구자의 탐색 과정과 학술 활동 전반을 유기적으로 지원합니다.

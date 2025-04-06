@@ -110,7 +110,7 @@ const FAQ = () => {
     <section className="pb-16 md:pb-32 pt-6 md:pt-8 px-4" id="faq">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-4 md:mb-6">
-          <h6 className="text-[#6A71A8] text-sm md:text-base font-medium uppercase tracking-[0.2em] mb-3">
+          <h6 className="text-[#6A71A8] text-base tracking-[0.2em] font-medium mb-3">
             FAQ
           </h6>
           <div className="w-10 h-[1px] bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] mx-auto mb-8 md:mb-12"></div>
