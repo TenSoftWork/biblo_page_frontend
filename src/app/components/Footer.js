@@ -262,7 +262,7 @@ const Footer = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="이메일 주소를 입력하세요."
-                      className="w-[200px] sm:w-[300px] py-2 bg-[#848ee1] text-white placeholder-white/50 border-b border-white/30 focus:outline-none focus:border-white/30 [&:-webkit-autofill]:bg-[#848ee1] [&:-webkit-autofill]:text-white [&:-webkit-autofill]:border-white/30"
+                      className="w-[200px] sm:w-[300px] py-2 bg-transparent text-white placeholder-white/50 border-b border-white/30 focus:outline-none focus:border-white/30 [&:-webkit-autofill]:bg-transparent [&:-webkit-autofill]:text-white [&:-webkit-autofill]:border-white/30 [&:-webkit-autofill]:!bg-transparent [&:-webkit-autofill]:!text-white [&:-webkit-autofill]:!border-white/30 [&:-webkit-autofill]:!box-shadow-[0_0_0_30px_transparent_inset] [&:-webkit-autofill]:!-webkit-text-fill-color-white"
                       required
                     />
                   </div>

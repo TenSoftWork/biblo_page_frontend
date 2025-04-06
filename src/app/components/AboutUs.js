@@ -217,11 +217,13 @@ const AboutUs = () => {
   return (
     <section className="py-16 lg:py-32" id="about-us">
       <div className="flex flex-col lg:flex-row items-top px-4">
-        <div className="w-full lg:w-[30%] lg:pl-8 mb-8 lg:mb-0">
-          <h6 className="text-[#6A71A8] text-base tracking-[0.2em] font-medium mb-3">
-            ABOUT US
-          </h6>
-          <div className="w-10 h-[1px] bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] mb-8 lg:mb-12"></div>
+        <div className="w-full lg:w-[30%] lg:pl-8 mb-4 lg:mb-0">
+          <div className="text-center lg:text-left">
+            <h6 className="text-[#6A71A8] text-base tracking-[0.2em] font-medium mb-3">
+              ABOUT US
+            </h6>
+            <div className="w-10 h-[1px] bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] mx-auto lg:mx-0 mb-8 lg:mb-12"></div>
+          </div>
         </div>
         <div className="max-w-7xl flex-1 flex flex-col items-left lg:pr-8">
           <div className="max-w-4xl">
@@ -232,12 +234,12 @@ const AboutUs = () => {
                 </span>{" "}
                 <span className="text-[#6A71A8]">the Leadership</span>
               </h3>
-              <p className="text-[#465478] text-lg max-w-2xl break-keep mb-4">
+              <p className="text-[#465478] text-lg max-w-2xl break-keep mb-4 text-left">
               Biblo AI(비블로에이아이 주식회사)는 도서관을 위한 AI 에이전트 솔루션에 특화된 기술 기업입니다.  
               정보 분류, 메타데이터 구축, 추천 시스템 등 도서관의 핵심 업무를 자동화해,  
               복잡한 작업을 빠르고 정확하게 수행할 수 있는 실용적인 AI 도구를 제공합니다.
               </p>
-              <p className="text-[#465478] text-lg max-w-2xl break-keep">
+              <p className="text-[#465478] text-lg max-w-2xl break-keep text-left">
               현장의 문제를 중심에 두고, 다양한 기관과 협업하여  
               기술이 실제 업무 환경에서 효과적으로 작동하도록 설계합니다.  
               기술보다 문제 해결에 집중하는 팀, Biblo AI입니다.
@@ -266,27 +268,27 @@ const AboutUs = () => {
                   <span className="text-[#6A71A8]">Explained —</span>
                 </h3>
                 <div className="space-y-6 text-[#465478]">
-                  <p className="text-[#465478] text-xl max-w-2xl break-keep">
+                  <p className="text-[#465478] text-xl max-w-2xl break-keep text-left">
                     연구자와 학습자를 위한 맞춤형 AI 에이전트
                   </p>
-                  <p className="text-[#465478] text-lg max-w-2xl break-keep mb-4">
+                  <p className="text-[#465478] text-lg max-w-2xl break-keep mb-4 text-left">
                     비블로(Biblo)는 Biblo AI가 텐소프트웍스 AI검색연구소와 협업하여 개발한, 도서관과 교육기관을 위한 AI 기반 정보 분석 에이전트입니다.
                     단순 검색을 넘어 학습 및 탐색 데이터를 분석하고, 정보 분류, 메타데이터 구축, 추천 시스템 등
                     도서관 핵심 업무를 자동화해 더 효율적이고 전략적인 정보 서비스를 가능하게 합니다.
                   </p>
-                  <p className="text-[#465478] text-lg max-w-2xl break-keep mb-10">
+                  <p className="text-[#465478] text-lg max-w-2xl break-keep mb-10 text-left">
                     실무 현장의 문제를 중심에 두고 설계되었으며,
                     축적된 메타데이터와 AI 분석 역량을 통해 학습과 연구 환경의 질을 높입니다.
                   </p>
-                  <p className="text-[#465478] text-xl max-w-2xl break-keep">
+                  <p className="text-[#465478] text-xl max-w-2xl break-keep text-left">
                     비블로(Biblo)의 주요 기능
                   </p>
-                  <ul className="list-disc pl-6 space-y-2 text-[#465478] text-lg max-w-2xl break-keep">
-                    <li>정확한 AI 검색 – 신뢰도 높은 학술 정보 탐색</li>
-                    <li>논문 요약 CMS – 연구성과 요약 및 홍보</li>
-                    <li>개인화 추천 – 학습 행동 기반 정보 제공</li>
-                    <li>온프레미스 지원 – 보안 강화 및 독립 운영 가능</li>
-                    <li>메타데이터 분석 – 커리큘럼 개선 및 연구 지원</li>
+                  <ul className="list-disc pl-6 space-y-2 text-[#465478] text-lg max-w-2xl break-keep text-left">
+                    <li className="text-left">정확한 AI 검색 – 신뢰도 높은 학술 정보 탐색</li>
+                    <li className="text-left">논문 요약 CMS – 연구성과 요약 및 홍보</li>
+                    <li className="text-left">개인화 추천 – 학습 행동 기반 정보 제공</li>
+                    <li className="text-left">온프레미스 지원 – 보안 강화 및 독립 운영 가능</li>
+                    <li className="text-left">메타데이터 분석 – 커리큘럼 개선 및 연구 지원</li>
                   </ul>
                 </div>
               </div>

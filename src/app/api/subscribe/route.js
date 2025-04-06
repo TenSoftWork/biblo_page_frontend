@@ -4,6 +4,11 @@ import nodemailer from "nodemailer";
 export async function POST(request) {
   try {
     const { email } = await request.json();
+    console.log("Received subscription request for:", email);
+    console.log("Environment variables:", {
+      EMAIL_USER: process.env.EMAIL_USER,
+      EMAIL_PASS: process.env.EMAIL_PASS ? "***" : undefined
+    });
 
     // Gmail SMTP 설정
     const transporter = nodemailer.createTransport({
@@ -32,7 +37,12 @@ export async function POST(request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Subscription error:", error);
+    console.error("Detailed subscription error:", {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+      command: error.command,
+    });
     return NextResponse.json(
       { error: "구독 처리 중 오류가 발생했습니다." },
       { status: 500 }

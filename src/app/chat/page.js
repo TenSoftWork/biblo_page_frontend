@@ -6,7 +6,7 @@ import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 
 const INITIAL_MESSAGE = {
-  text: "비블로와 관련하여 궁금하신 점이 있으시면 편하게 질문해 주세요 👋",
+  text: "비블로(Biblo)와 관련하여 궁금하신 점이 있으시면 편하게 질문해 주세요 👋",
   isUser: false,
 };
 
@@ -556,7 +556,7 @@ useEffect(() => {
                 onClick={startNewChat}
                 className="bg-white text-[#5967B5] border border-[#5967B5]/20 px-6 py-2.5 rounded-full font-medium hover:bg-[#5967B5]/5 transition-colors"
               >
-                Start New Chat
+                새로운 대화 시작
               </button>
               
               {sessionId && (
@@ -623,7 +623,7 @@ useEffect(() => {
                     disabled={isLoading || !inputValue.trim()}
                     className="hidden sm:block bg-[#5967B5] text-white px-6 py-2.5 rounded-full font-medium hover:bg-[#4A579E] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send
+                    보내기
                   </button>
                   <button
                     type="submit"
