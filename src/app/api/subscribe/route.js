@@ -5,7 +5,7 @@ export async function POST(request) {
   try {
     const { email } = await request.json();
 
-    // 이메일 전송 설정
+    // Gmail SMTP 설정
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -34,7 +34,7 @@ export async function POST(request) {
   } catch (error) {
     console.error("Subscription error:", error);
     return NextResponse.json(
-      { error: "Failed to process subscription" },
+      { error: "구독 처리 중 오류가 발생했습니다." },
       { status: 500 }
     );
   }
