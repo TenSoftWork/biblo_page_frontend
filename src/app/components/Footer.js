@@ -256,14 +256,16 @@ const Footer = () => {
                   contact@biblo.ai
                 </p>
                 <form onSubmit={handleSubmit} className="flex gap-2 mb-6 sm:mb-8">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="이메일 주소를 입력하세요."
-                    className="bg-transparent border-b border-white/30 text-white placeholder-white/50 py-2 flex-grow focus:outline-none focus:border-white"
-                    required
-                  />
+                  <div className="relative">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="이메일 주소를 입력하세요."
+                      className="w-[200px] sm:w-[300px] py-2 bg-[#848ee1] text-white placeholder-white/50 border-b border-white/30 focus:outline-none focus:border-white/30 [&:-webkit-autofill]:bg-[#848ee1] [&:-webkit-autofill]:text-white [&:-webkit-autofill]:border-white/30"
+                      required
+                    />
+                  </div>
                   <button 
                     type="submit"
                     disabled={isSubmitting}
