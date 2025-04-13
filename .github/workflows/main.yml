@@ -20,14 +20,12 @@ jobs:
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-frontend:latest .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-frontend:latest
       
-      # 4) SSH를 통한 Jenkins 작업 트리거 (새 키 사용)
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
+      # 4) SSH를 통한 Jenkins 작업 트리거
+      - name: Trigger Jenkins via SSH
+        uses: appleboy/ssh-action@master
         with:
+          host: 112.219.163.139
+          port: 1398
+          username: kjm
           key: ${{ secrets.JENKINS_SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.JENKINS_KNOWN_HOSTS }}
-          if_key_exists: replace
-      
-      - name: Trigger Jenkins Deployment via SSH
-        run: |
-          ssh -p 1398 kjm@112.219.163.139 'curl -X POST "http://localhost:8080/job/biblo_homepage_FE/build?token=11255b2c8b4064d1325ba36522e5d01c6b"'
+          script: curl -X POST "http://localhost:8080/job/biblo_homepage_FE/build?token=11255b2c8b4064d1325ba36522e5d01c6b"
