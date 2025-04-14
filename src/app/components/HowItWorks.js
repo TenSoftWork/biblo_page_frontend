@@ -32,7 +32,7 @@ const HowItWorks = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto mb-8 sm:mb-12 px-6">
         {/* Step 1 */}
         <motion.div
-          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-center py-8 sm:py-12 px-4 sm:px-8"
+          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-start py-8 sm:py-12 px-4 sm:px-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -80,7 +80,7 @@ const HowItWorks = () => {
 
         {/* Step 2 */}
         <motion.div
-          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-center py-8 sm:py-12 px-4 sm:px-8"
+          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-start py-8 sm:py-12 px-4 sm:px-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -128,7 +128,7 @@ const HowItWorks = () => {
 
         {/* Step 3 */}
         <motion.div
-          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-center py-8 sm:py-12 px-4 sm:px-8"
+          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-start py-8 sm:py-12 px-4 sm:px-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -176,7 +176,7 @@ const HowItWorks = () => {
 
         {/* Step 4 */}
         <motion.div
-          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-center py-8 sm:py-12 px-4 sm:px-8"
+          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-start py-8 sm:py-12 px-4 sm:px-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
