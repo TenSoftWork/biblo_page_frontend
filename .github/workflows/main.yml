@@ -28,4 +28,9 @@ jobs:
           port: 1398
           username: kjm
           key: ${{ secrets.JENKINS_SSH_PRIVATE_KEY }}
-          script: curl -X POST "http://localhost:8080/job/biblo_homepage_FE/build?token=11255b2c8b4064d1325ba36522e5d01c6b"
+          script: |
+            # Jenkins 크럼브(CSRF 토큰) 가져오기
+            CRUMB=$(curl -s 'http://localhost:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)' -u tsw_jenkins:11255b2c8b4064d1325ba36522e5d01c6b)
+            
+            # 가져온 크럼브를 사용하여 Jenkins 작업 트리거
+            curl -X POST "http://localhost:8080/job/biblo_homepage_FE/build?token=11255b2c8b4064d1325ba36522e5d01c6b" -H "$CRUMB" -u tsw_jenkins:11255b2c8b4064d1325ba36522e5d01c6b
