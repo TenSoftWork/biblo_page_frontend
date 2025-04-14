@@ -29,18 +29,8 @@ jobs:
           username: kjm
           key: ${{ secrets.JENKINS_SSH_PRIVATE_KEY }}
           script: |
-            # 먼저 Jenkins가 실행 중인지 확인
-            curl -s http://localhost:8080/ > /dev/null
-            
             # Jenkins 크럼브(CSRF 토큰) 가져오기
             CRUMB=$(curl -s 'http://localhost:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)' -u tsw_jenkins:11255b2c8b4064d1325ba36522e5d01c6b)
             
-            # Jenkins 작업 경로 확인
-            if curl -s -f http://localhost:8080/job/biblo_homepage_FE/ -u tsw_jenkins:11255b2c8b4064d1325ba36522e5d01c6b > /dev/null; then
-              echo "Jenkins job exists, triggering build..."
-              # 작업 트리거
-              curl -X POST "http://localhost:8080/job/biblo_homepage_FE/build?token=11255b2c8b4064d1325ba36522e5d01c6b" -H "$CRUMB" -u tsw_jenkins:11255b2c8b4064d1325ba36522e5d01c6b
-            else
-              echo "Jenkins job path not found, listing available jobs:"
-              curl -s http://localhost:8080/api/json?tree=jobs[name] -u tsw_jenkins:11255b2c8b4064d1325ba36522e5d01c6b | grep -o '"name":"[^"]*"'
-            fi
+            # 올바른 작업 이름으로 빌드 트리거
+            curl -X POST "http://localhost:8080/job/Biblo_hompage_FE/build?token=11255b2c8b4064d1325ba36522e5d01c6b" -H "$CRUMB" -u tsw_jenkins:11255b2c8b4064d1325ba36522e5d01c6b
