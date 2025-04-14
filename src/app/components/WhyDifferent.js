@@ -100,23 +100,27 @@ const WhyDifferent = () => {
   return (
     <section className="pt-16 md:pt-32" id="why-different">
       <div className="flex flex-col md:flex-row items-top">
-        <div className="w-full md:w-[30%] px-4 md:pl-8 mb-8 md:mb-0">
-          <h6 className="text-[#6A71A8] text-sm md:text-base tracking-[0.2em] font-medium mb-3">
-            INTEGRATIONS
-          </h6>
-          <div className="w-10 h-[1px] bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] mb-8 md:mb-12"></div>
+        <div className="w-full md:w-[30%] px-4 md:pl-8 mb-4 md:mb-0">
+          <div className="text-center md:text-left">
+            <h6 className="text-[#6A71A8] text-base tracking-[0.2em] font-medium mb-3">
+              INTEGRATION
+            </h6>
+            <div className="w-10 h-[1px] bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] mx-auto md:mx-0 mb-8 md:mb-12"></div>
+          </div>
         </div>
-        <div className="max-w-7xl flex-1 flex flex-col items-left px-4 md:pr-8">
+        <div className="max-w-7xl flex-1 flex flex-col items-center md:items-start px-4 md:pr-8">
           <div className="max-w-4xl">
             <div className="mb-12 md:mb-20">
-              <h3 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-4 md:mb-6">
-                <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent">
-                  Why Biblo is Different
+              <h3 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-4 md:mb-6 text-center md:text-left">
+                <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent text-center md:text-left w-full block">
+                  How Biblo is Different
                 </span>
               </h3>
-              <p className="text-[#465478] text-base md:text-lg">
-                비블로는 작은 것도 모든 것이 AI 서비스 하나가 모든 서로 다른
-                기업으로 인해 기능을 제공합니다.
+              <p className="text-[#465478] text-lg max-w-2xl break-keep text-left">
+                비블로(Biblo)는 검색, 분류, 추천, 분석 등  
+                도서관의 다양한 기능을 하나의 AI 에이전트로 통합합니다.  
+                여러 솔루션을 따로 조합하지 않아도,  
+                연구자와 사서를 위한 핵심 기능이 비블로 하나에 모두 담겨 있습니다.
               </p>
             </div>
 
@@ -142,9 +146,10 @@ const WhyDifferent = () => {
             {/* Integration Logos */}
             <div className="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-20">
               <div className="w-full md:w-[30%]">
-                <p className="text-sm md:text-base">
-                  도서관 서비스 자동화 기능까지 포함하여, 검색을 넘어 실제 연구
-                  활동을 지원
+                <p className="text-[#465478] text-lg max-w-2xl break-keep text-left">
+                검색 기능에 그치지 않고,  
+                분류, 추천, 분석, 도서관 서비스 자동화까지 포함하여  
+                실제 연구자의 탐색 과정과 학술 활동 전반을 유기적으로 지원합니다.
                 </p>
               </div>
               <div className="w-full md:w-[70%] relative">
@@ -220,11 +225,11 @@ const WhyDifferent = () => {
 
             {/* CTA */}
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 py-8 md:p-8 border-t border-[#6A71A8]/20 mt-8 md:my-20">
-              <p className="text-[#6A71A8] text-sm md:text-lg text-center md:text-left w-full md:w-[50%]">
-              학술 연구를 위한 최적의 AI 에이전트
+              <p className="text-[#465478] text-lg max-w-2xl break-keep text-center md:text-left w-full md:w-[50%]">
+              도서관 데이터를 이해하는 AI, 연구로 곧바로 이어집니다.
               </p>
               <div className="w-full md:w-[40%] text-center md:text-right">
-                <AnimatedButton href="/contact#top">Connect Us</AnimatedButton>
+                <AnimatedButton href="/chat" className="w-[160px]">Try Biblo</AnimatedButton>
               </div>
             </div>
           </div>

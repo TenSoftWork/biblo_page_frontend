@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 import AnimatedButton from "./AnimatedButton";
+import { useState, useEffect } from "react";
 
 const MarqueeItem = ({ text }) => (
   <div className="flex items-center gap-6 sm:gap-12 mr-6 sm:mr-12">
@@ -33,24 +34,66 @@ const MarqueeItem = ({ text }) => (
         priority
       />
     </motion.div>
-    <span className="text-[#848ee1] text-xl sm:text-3xl whitespace-nowrap">
+    <span className="text-[#848ee1] text-lg whitespace-nowrap">
       {text}
     </span>
   </div>
 );
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("");
+
+  useEffect(() => {
+    if (submitStatus) {
+      const timer = setTimeout(() => {
+        setSubmitStatus("");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus("");
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setEmail("");
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const marqueeItems = [
-    "Predictive Analysis",
-    "Business Growth",
-    "Smart Automation",
-    "Strategic Planning",
-    "AI Intelligence",
-    "Performance Optimization",
-    "Seamless Integration",
-    "Future-Proof Innovation",
-    "Advanced Analytics",
-    "98% Success Rate",
+    "AI 기반 자료 분류",
+    "메타데이터 구조화",
+    "문맥 기반 탐색",
+    "지식 맥락 연결",
+    "개인화된 정보 추천",
+    "이용 행태 분석",
+    "검색 흐름 최적화",
+    "도서관 시스템 연동",
+    "연구 흐름 지원",
+    "차세대 정보 서비스",
   ];
 
   const scrollToTop = () => {
@@ -80,22 +123,25 @@ const Footer = () => {
             </div>
 
             {/* Text Content */}
-            <h2 className="text-4xl sm:text-7xl text-white mb-4">
-              Ready to Elevate Your Research?
+            <h2 className="text-4xl sm:text-7xl text-white mb-10">
+              Ready to Elevate 
+              <br />Your Research?
             </h2>
-            <p className="text-white/90 text-base sm:text-lg max-w-2xl mb-6 sm:mb-8">
-              Discover AI-powered insights for libraries, <br /> researchers, and students. Biblo transforms
-              academic information into actionable knowledge.
+            <p className="text-white/90 text-base sm:text-lg max-w-2xl mb-6 sm:mb-8 break-keep">
+              비블로(Biblo)는 도서관, 연구자, 학습자를 위한 AI 에이전트입니다.  
+              흩어져 있는 학술 정보와 메타데이터를 정밀하게 구조화하고,  
+              개인의 탐색 흐름에 맞춰 의미 있는 지식으로 재구성합니다.  
+              단순한 검색을 넘어, 실제 학습과 연구에 바로 적용 가능한 정보로 전환합니다.
             </p>
 
             {/* Buttons */}
             <div className="flex gap-4 flex-wrap justify-center">
-              <AnimatedButton href="/contact#top" variant="secondary">
-                Book a Demo
+              <AnimatedButton href="/chat" variant="secondary" className="w-[160px]">
+                Try Biblo
               </AnimatedButton>
-              <button className="border-2 border-white text-white px-4 sm:px-6 py-2 rounded-full font-medium hover:bg-white/10 transition-colors flex items-center gap-2">
+{/*               <button className="border-2 border-white text-white px-4 sm:px-6 py-2 rounded-full font-medium hover:bg-white/10 transition-colors flex items-center gap-2">
                 <IoRocketOutline className="text-lg sm:text-xl" />2 university slots available
-              </button>
+              </button> */}
             </div>
           </motion.div>
         </div>
@@ -148,7 +194,7 @@ const Footer = () => {
             }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <div className="relative w-[350px] sm:w-[900px] h-[150px] sm:h-[300px]">
+            <div className="relative w-[385px] sm:w-[990px] h-[165px] sm:h-[330px]">
               <Image
                 src="/biblo_big_logo_blue.png"
                 alt="Biblo Logo"
@@ -186,14 +232,14 @@ const Footer = () => {
               <Image
                 src="/biblo_logo_white_big.png"
                 alt="Biblo"
-                width={300}
-                height={120}
+                width={147}
+                height={59}
                 className="mb-4 sm:mb-6"
               />
-              <p className="text-white/90 text-lg sm:text-xl">
-                Advanced strategies with
+              <p className="text-white/90 text-base sm:text-lg">
+                도서관 데이터를 넘어,
                 <br />
-                Smart AI insights.
+                지식의 흐름까지 탐색합니다.
               </p>
             </div>
 
@@ -204,18 +250,38 @@ const Footer = () => {
                   Stay in the Loop
                 </h3>
                 <p className="text-white/90 text-base sm:text-lg mb-4">
-                  Be first to know what&apos;s next
+                  최신 소식을 빠르게 전달받으세요.
                 </p>
-                <div className="flex gap-2 mb-6 sm:mb-8">
-                  <input
-                    type="email"
-                    placeholder="Your Email"
-                    className="bg-transparent border-b border-white/30 text-white placeholder-white/50 py-2 flex-grow focus:outline-none focus:border-white"
-                  />
-                  <button className="text-white text-xl">→</button>
-                </div>
+                <p className="text-white/90 text-base sm:text-lg mb-4">
+                  contact@biblo.ai
+                </p>
+                <form onSubmit={handleSubmit} className="flex gap-2 mb-6 sm:mb-8">
+                  <div className="relative">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="이메일 주소를 입력하세요."
+                      className="w-[200px] sm:w-[300px] py-2 bg-transparent text-white placeholder-white/50 border-b border-white/30 focus:outline-none focus:border-white/30 [&:-webkit-autofill]:bg-transparent [&:-webkit-autofill]:text-white [&:-webkit-autofill]:border-white/30 [&:-webkit-autofill]:!bg-transparent [&:-webkit-autofill]:!text-white [&:-webkit-autofill]:!border-white/30 [&:-webkit-autofill]:!box-shadow-[0_0_0_30px_transparent_inset] [&:-webkit-autofill]:!-webkit-text-fill-color-white"
+                      required
+                    />
+                  </div>
+                  <button 
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="text-white text-xl hover:text-white/80 transition-colors disabled:opacity-50"
+                  >
+                    {isSubmitting ? "..." : "→"}
+                  </button>
+                </form>
+                {submitStatus === "success" && (
+                  <p className="text-white/90 text-sm">비블로 뉴스레터 구독이 완료되었습니다.</p>
+                )}
+                {submitStatus === "error" && (
+                  <p className="text-white/90 text-sm">오류가 발생했습니다. 다시 시도해주세요.</p>
+                )}
               </div>
-              <div className="flex gap-6 sm:gap-8">
+              {/* <div className="flex gap-6 sm:gap-8">
                 <Link href="#" className="text-white hover:text-white/80">
                   <FaTwitter size={18} className="sm:w-5 sm:h-5" />
                 </Link>
@@ -231,13 +297,16 @@ const Footer = () => {
                 <Link href="#" className="text-white hover:text-white/80">
                   <FaDiscord size={18} className="sm:w-5 sm:h-5" />
                 </Link>
-              </div>
+              </div> */}
+              <p className="text-white/90 text-sm sm:text-md mt-auto pt-9 sm:pt-12">
+                Copyright © {new Date().getFullYear()} Biblo AI, Inc.
+              </p>
             </div>
 
-            {/* Links Blocks Container */}
-            <div className="flex gap-8 sm:gap-0">
+            {/* Links Blocks Container - Hidden on all screens */}
+            <div className="hidden">
               {/* First Links Block */}
-              <div className="flex flex-col max-w-[300px] p-4 sm:p-6">
+              {/* <div className="flex flex-col max-w-[300px] p-4 sm:p-6">
                 <div className="grid gap-2">
                   <Link
                     href="/"
@@ -283,13 +352,13 @@ const Footer = () => {
                   </Link>
                 </div>
                 <p className="text-white/90 text-sm sm:text-md mt-auto pt-6 sm:pt-8">
-                  Copyright © Rescale 2025
+                  Copyright © {new Date().getFullYear()} Biblo AI, Inc.
                 </p>
-              </div>
+              </div> */}
 
               {/* Second Links Block */}
               <div className="flex flex-col max-w-[300px] p-4 sm:p-6 md:hidden">
-                <div className="grid gap-2">
+                {/* <div className="grid gap-2">
                   <Link
                     href="/about"
                     className="text-white text-base sm:text-lg hover:text-white/80"
@@ -326,14 +395,13 @@ const Footer = () => {
                   >
                     404
                   </Link>
-                </div>
+                </div> */}
               </div>
             </div>
 
             <div className="flex gap-8 sm:gap-0 hidden md:flex">
-
               {/* Second Links Block */}
-              <div className="flex flex-col max-w-[300px] p-4 sm:p-6">
+              {/* <div className="flex flex-col max-w-[300px] p-4 sm:p-6">
                 <div className="grid gap-2">
                   <Link
                     href="/about"
@@ -372,9 +440,8 @@ const Footer = () => {
                     404
                   </Link>
                 </div>
-              </div>
+              </div> */}
             </div>
-
           </div>
         </div>
 

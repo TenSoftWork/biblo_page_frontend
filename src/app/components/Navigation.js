@@ -46,6 +46,15 @@ const Navigation = () => {
     };
   }, [isOpen]);
 
+  const handleScroll = (e, href) => {
+    e.preventDefault();
+    setIsOpen(false);
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView();
+    }
+  };
+
   const navSlideVariants = {
     initial: {
       y: -100,
@@ -72,7 +81,7 @@ const Navigation = () => {
     },
     open: {
       width: "min(450px, 95vw)",
-      height: "min(250px, 80vh)",
+      height: "min(220px, 80vh)",
       transition: {
         duration: 0.3,
         ease: "easeInOut",
@@ -107,13 +116,13 @@ const Navigation = () => {
     }),
   };
 
-  const menuItems = [
-    { name: "Biblo 소개", href: "#why-different" },
+  const menuItems = [ 
+    { name: "비블로(Biblo) 소개", href: "#product-spotlight" },
     { name: "핵심 기능", href: "#how-it-works" },
-    { name: "기술 아키텍처", href: "#product-spotlight" },
+    { name: "차별화 요소", href: "#why-different" },
     { name: "활용 사례", href: "#features" },
-    { name: "FAQ", href: "#faq" },
     { name: "회사 소개", href: "#about-us" },
+    { name: "자주 묻는 질문", href: "#faq" },
   ];
 
   const socialLinks = [
@@ -144,7 +153,7 @@ const Navigation = () => {
           animate={isOpen ? "open" : "closed"}
         >
           {/* Header Section */}
-          <div className="flex items-center justify-between p-3 sm:p-4">
+          <div className="flex items-center justify-between px-6 sm:px-8 py-3 sm:py-4">
             {/* Logo */}
             <Link href="/" className="relative">
               <div className="relative w-[80px] sm:w-[100px]">
@@ -170,8 +179,8 @@ const Navigation = () => {
                     className="w-1 h-1 bg-[#7584D6] rounded-full"
                     animate={isOpen ? "open" : "closed"}
                     variants={{
-                      closed: { scale: 1 },
-                      open: { scale: 0 },
+                      closed: { scale: 1, opacity: 1 },
+                      open: { opacity: 0.5 },
                     }}
                     transition={{ duration: 0.2, delay: i * 0.05 }}
                   />
@@ -202,12 +211,12 @@ const Navigation = () => {
                   <LuMessageCircleMore className="w-4 h-4 sm:w-5 sm:h-5" />
                 </motion.div>
                 <motion.span
-                  className="ml-2 text-sm sm:text-base"
+                  className="text-sm sm:text-base"
                   initial={{ opacity: 0 }}
                   animate={isOpen ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  Book a Call
+                  Ask Biblo
                 </motion.span>
               </Link>
             </motion.div>
@@ -215,12 +224,12 @@ const Navigation = () => {
 
           {/* Menu Items */}
           <motion.div
-            className="relative px-3 sm:px-4 pb-4 h-[calc(100%-67px)]"
+            className="relative px-6 sm:px-8 pt-4 pb-4 h-[calc(100%-67px)]"
             variants={menuVariants}
             initial="closed"
             animate={isOpen ? "open" : "closed"}
           >
-            <div className="grid grid-cols-2 gap-4 sm:gap-8">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4">
               {/* Column 1 */}
               <ul className="space-y-3 sm:space-y-4">
                 {column1Items.map((item, i) => (
@@ -234,6 +243,7 @@ const Navigation = () => {
                     <Link
                       href={item.href}
                       className="block text-[#7584D6] hover:text-[#4251A6] transition-colors text-sm sm:text-base"
+                      onClick={(e) => handleScroll(e, item.href)}
                     >
                       {item.name}
                     </Link>
@@ -254,6 +264,7 @@ const Navigation = () => {
                     <Link
                       href={item.href}
                       className="block text-[#7584D6] hover:text-[#4251A6] transition-colors text-sm sm:text-base"
+                      onClick={(e) => handleScroll(e, item.href)}
                     >
                       {item.name}
                     </Link>

@@ -34,10 +34,10 @@ const Hero = () => {
             >
               <span className="font-medium bg-[#7584D6] text-white px-2.5 sm:px-3 md:px-4 py-1.5 rounded-full flex items-center gap-1">
                 <IoSparklesOutline className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" />
-                12K+
+                BIBLO
               </span>
               <span className="font-medium text-[#7584D6]">
-                ASK AI ANYTHING
+                BUILT FOR LIBRARIES
               </span>
             </motion.div>
 
@@ -50,7 +50,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="heading text-[#465478] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  Enhance
+                  Redefine
                 </motion.h1>
                 <motion.h1
                   initial={{ opacity: 0, x: -20 }}
@@ -58,7 +58,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.4 }}
                   className="heading text-[#7584D6] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  search & learning
+                  Search and Learning
                 </motion.h1>
               </div>
 
@@ -69,7 +69,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="heading text-[#446080] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  with
+                  with the
                 </motion.h1>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -118,12 +118,12 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.8 }}
-              className="text-sm sm:text-base md:text-lg lg:text-xl text-[#465478] my-8 mx-auto px-16 sm:px-4"
+              className="text-[#465478] text-lg max-w-2xl break-keep my-8 mx-auto px-16 sm:px-4"
             >
-              비블로는 도서관·학술 정보 특화 AI 에이전트입니다.
+              비블로(Biblo)는 도서관과 학술 정보를 위한 AI 에이전트입니다. 
               <br className="hidden sm:block"></br>
-              검색부터 연구·진로 추천, 서비스 운영까지 한 번에 연결하고
-              자동화합니다.
+              검색부터 연구·진로 추천까지,  
+              서비스 운영 전반을 하나로 연결하고 자동화합니다.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -133,11 +133,11 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.9 }}
               className="flex  sm:flex-row items-center justify-center gap-2.5 sm:gap-3 md:gap-4 px-3 sm:px-4"
             >
-              <AnimatedButton href="/contact#top">
-                Preview Experience
+              <AnimatedButton href="/contact#top" className="w-[160px]">
+                Try Biblo
               </AnimatedButton>
               <motion.button
-                className={`relative rounded-full font-medium overflow-hidden bg-white border border-[#6A71A8]/20 shadow-lg`}
+                className={`relative rounded-full font-medium overflow-hidden bg-white border border-[#6A71A8]/20 shadow-lg w-[160px]`}
                 whileHover={{
                   boxShadow: "0px -8px 0px inset rgba(169, 169, 169, 0.4)",
                   transition: { duration: 0.4 },
@@ -168,7 +168,7 @@ const Hero = () => {
                     ease: "easeOut",
                   }}
                 >
-                  Download
+                  PDF 소개자료
                 </motion.span>
               </motion.button>
             </motion.div>
@@ -182,7 +182,7 @@ const Hero = () => {
             className="mt-10 sm:mt-12 md:mt-14"
           >
             <h6 className="text-center text-[#465478] text-xs sm:text-sm md:text-[14px] font-medium mb-10 sm:mb-6 md:mb-8">
-              ✦ AI-POWERED ✦ RESEARCHER NETWORK
+              ✦ WHERE KNOWLEDGE MEETS CONNECTION ✦
             </h6>
             <div className="relative mx-auto w-full max-w-[800px]">
               <div

@@ -21,16 +21,18 @@ const HowItWorks = () => {
             Biblo AI Agent
           </span>
         </h3>
-        <p className="text-[#465478] max-w-2xl mx-auto text-lg px-3">
-          무엇이든 질문하면 AI가 개인화된 인사이트를 제공합니다.
+        <p className="text-[#465478] max-w-2xl mx-auto text-lg px-3 break-keep">
+        도서관 데이터를 구조화하고,  
+        사용자의 탐색 흐름을 이해해  
+        지식의 맥락까지 연결합니다.
         </p>
       </div>
 
       {/* Steps Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto mb-12 sm:mb-16 md:mb-20 px-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto mb-8 sm:mb-12 px-6">
         {/* Step 1 */}
         <motion.div
-          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-center py-8 sm:py-12 px-4 sm:px-8"
+          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-start py-8 sm:py-12 px-4 sm:px-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -78,7 +80,7 @@ const HowItWorks = () => {
 
         {/* Step 2 */}
         <motion.div
-          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-center py-8 sm:py-12 px-4 sm:px-8"
+          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-start py-8 sm:py-12 px-4 sm:px-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -126,7 +128,7 @@ const HowItWorks = () => {
 
         {/* Step 3 */}
         <motion.div
-          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-center py-8 sm:py-12 px-4 sm:px-8"
+          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-start py-8 sm:py-12 px-4 sm:px-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -174,7 +176,7 @@ const HowItWorks = () => {
 
         {/* Step 4 */}
         <motion.div
-          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-center py-8 sm:py-12 px-4 sm:px-8"
+          className="relative rounded-lg overflow-hidden bg-white/50 backdrop-blur-sm flex flex-col items-center justify-start py-8 sm:py-12 px-4 sm:px-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -222,12 +224,12 @@ const HowItWorks = () => {
       </div>
 
       {/* CTA */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 p-6 md:p-8 border-t border-[#6A71A8]/20 mt-8 md:mt-12">
+{/*       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 p-6 md:p-8 border-t border-[#6A71A8]/20 mt-8 md:mt-12">
         <p className="text-[#6A71A8] text-base md:text-lg text-center">
           기존 학술 데이터베이스 및 도서관 시스템과 연동을 지원합니다.{" "}
         </p>
         <AnimatedButton href="/contact#top">Ask Our AI Agent</AnimatedButton>
-      </div>
+      </div> */}
     </section>
   );
 };

@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - EMAIL_USER=dw.kim@biblo.ai
+      - EMAIL_PASS=mmrf dtmm zbcm uiij
+    restart: unless-stopped 
