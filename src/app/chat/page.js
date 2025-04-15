@@ -5,13 +5,21 @@ import Image from "next/image";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 
+// 고유 ID 생성 함수
+function generateUniqueId() {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+}
+
 const INITIAL_MESSAGE = {
+  id: "initial-message", // 고유 ID 추가
   text: "비블로(Biblo)와 관련하여 궁금하신 점이 있으시면 편하게 질문해 주세요 👋",
   isUser: false,
+  timestamp: Date.now()
 };
 
-const ChatMessage = ({ message, isUser, isLoading, messageId, onFeedback, feedback }) => (
+const ChatMessage = ({ message, isUser, isLoading, messageId, onFeedback, feedback, id }) => (
   <motion.div
+    key={id} // 고유 ID를 키로 사용
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     className={`flex ${isUser ? "justify-end" : "justify-start"} mb-4 w-full`}
@@ -232,14 +240,15 @@ const Chat = () => {
       conversationHistory.forEach(msg => {
         const isUserMsg = msg.role === "user";
         const msgObj = {
+          id: msg.id || generateUniqueId(), // 고유 ID 추가
           text: msg.content,
           isUser: isUserMsg,
-          timestamp: msg.timestamp
+          timestamp: msg.timestamp || Date.now() // 타임스탬프가 없는 경우 현재 시간 사용
         };
         
         // AI 메시지인 경우 ID와 피드백 정보 추가
         if (!isUserMsg) {
-          msgObj.message_id = msg.id;
+          msgObj.message_id = msg.id; // 피드백용 메시지 ID
           msgObj.feedback = null; // 피드백 정보는 별도로 관리
         }
         
@@ -248,21 +257,20 @@ const Chat = () => {
       
       // 중복 메시지 제거 및 시간순 정렬
       const uniqueMessages = [];
-      const seenTexts = new Set();
+      const seenIds = new Set(); // 텍스트 대신 ID로 중복 체크
       
       // INITIAL_MESSAGE는 항상 포함
       uniqueMessages.push(INITIAL_MESSAGE);
-      seenTexts.add(INITIAL_MESSAGE.text);
+      seenIds.add(INITIAL_MESSAGE.id);
       
-      // 나머지 메시지들을 시간순으로 정렬하고 중복 제거
+      // 나머지 메시지들을 시간순으로 정렬하고 ID 기반으로 중복 제거
       newMessages
-        .filter(msg => msg !== INITIAL_MESSAGE)
+        .filter(msg => msg.id !== INITIAL_MESSAGE.id)
         .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0))
         .forEach(msg => {
-          const key = `${msg.isUser}-${msg.text}`;
-          if (!seenTexts.has(key)) {
+          if (!seenIds.has(msg.id)) {
             uniqueMessages.push(msg);
-            seenTexts.add(key);
+            seenIds.add(msg.id);
           }
         });
       
@@ -384,10 +392,12 @@ const Chat = () => {
         else if (data.type === "message_end") {
           // 메시지 완료 처리 - 서버로부터 전달받은 메시지 ID 사용
           setMessages(prev => [...prev, {
+            id: generateUniqueId(), // 고유 ID 생성
             text: data.full_response,
             isUser: false,
-            message_id: data.message_id, // 서버와 동일한 ID 사용
-            feedback: null
+            message_id: data.message_id, // 서버와 동일한 ID 사용 (피드백용)
+            feedback: null,
+            timestamp: Date.now() // 현재 시간 기록
           }]);
           
           console.log("메시지 완료, ID:", data.message_id);
@@ -409,8 +419,10 @@ const Chat = () => {
           
           // 오류 메시지 표시
           setMessages(prev => [...prev, {
+            id: generateUniqueId(), // 고유 ID 생성
             text: "죄송합니다. 현재 연결에 문제가 있습니다. 잠시 후 다시 시도해 주세요.",
-            isUser: false
+            isUser: false,
+            timestamp: Date.now() // 현재 시간 기록
           }]);
         }
       } catch (error) {
@@ -494,9 +506,10 @@ const Chat = () => {
     e.preventDefault();
     if (!inputValue.trim() || isLoading) return;
     
-    // 사용자 메시지를 대화 기록에 추가 (먼저 로컬에 추가)
+    // 사용자 메시지를 대화 기록에 추가 (고유 ID 생성)
     const userMessage = inputValue;
     const userMessageObj = { 
+      id: generateUniqueId(), // 고유 ID 생성
       text: userMessage, 
       isUser: true,
       timestamp: Date.now()
@@ -605,9 +618,10 @@ const Chat = () => {
                 className="h-[calc(100%-4rem)] sm:h-[450px] md:h-[70vh] overflow-y-auto p-3 sm:p-6 space-y-4 scrollbar-thin scrollbar-thumb-[#5967B5]/20 scrollbar-track-transparent hover:scrollbar-thumb-[#5967B5]/30 transition-colors"
                 style={{ scrollbarGutter: "stable" }}
               >
-                {messages.map((message, index) => (
+                {messages.map((message) => (
                   <ChatMessage
-                    key={index}
+                    key={message.id} // index 대신 고유 ID 사용
+                    id={message.id}
                     message={message.text}
                     isUser={message.isUser}
                     isLoading={false}
@@ -620,6 +634,8 @@ const Chat = () => {
                 {/* 스트리밍 응답 표시 */}
                 {streamingResponse && (
                   <ChatMessage 
+                    key="streaming-response"
+                    id="streaming-response"
                     message={streamingResponse} 
                     isUser={false} 
                     isLoading={false}
@@ -629,6 +645,8 @@ const Chat = () => {
                 {/* 로딩 표시 (스트리밍 없을 때) */}
                 {isLoading && !streamingResponse && (
                   <ChatMessage 
+                    key="loading-indicator"
+                    id="loading-indicator"
                     message="" 
                     isUser={false} 
                     isLoading={true}
@@ -676,7 +694,7 @@ const Chat = () => {
             </div>
           </div>
         </div>
-      </main>
+        </main>
       <Footer />
     </>
   );
