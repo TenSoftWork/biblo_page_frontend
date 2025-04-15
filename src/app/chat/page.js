@@ -117,6 +117,7 @@ const Chat = () => {
   const [sessionId, setSessionId] = useState(null);
   const [streamingResponse, setStreamingResponse] = useState("");
   const [currentStreamingMessageId, setCurrentStreamingMessageId] = useState(null);
+  const [conversationHistory, setConversationHistory] = useState([]); // 서버로부터 받은 대화 기록
   
   const chatContainerRef = useRef(null);
   const inputRef = useRef(null);
@@ -151,7 +152,7 @@ const Chat = () => {
   
   // sessionId가 변경될 때 /extract_user_info API를 최초 1회 호출
   useEffect(() => {
-    if (sessionId) {
+    if (sessionId && !userInfoCalledRef.current) {
       fetch(`${API_BASE_URL}/extract_user_info`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -180,11 +181,8 @@ const Chat = () => {
         })
         .catch((error) => {
           console.error("Error checking session:", error);
-          // 오류 발생 시 세션 초기화 (새로운 세션 시작)
-          setSessionId(null);
-          localStorage.removeItem("sessionId");
-          setMessages([INITIAL_MESSAGE]);
-          userInfoCalledRef.current = false;
+          // 오류가 발생해도 세션을 초기화하지 않고 계속 진행
+          userInfoCalledRef.current = true;
         });
     }
   }, [sessionId]);
@@ -198,13 +196,6 @@ const Chat = () => {
       const handleUnload = () => {
         disconnectWebSocket();
         disconnectStreamWebSocket();
-        if (sessionId) {
-          // 동기적으로 세션 종료 요청 (비콘 API 사용)
-          navigator.sendBeacon(
-            `${API_BASE_URL}/end_session`,
-            JSON.stringify({ session_id: sessionId })
-          );
-        }
       };
       
       window.addEventListener('beforeunload', handleUnload);
@@ -228,6 +219,58 @@ const Chat = () => {
     }
   }, [messages]);
   
+  // 서버에서 받은 대화 기록과 로컬 상태를 동기화
+  useEffect(() => {
+    if (conversationHistory.length > 0) {
+      // 메시지 목록 재구성
+      const newMessages = [];
+      
+      // 초기 메시지는 항상 포함
+      newMessages.push(INITIAL_MESSAGE);
+      
+      // 서버 대화 기록에서 메시지 추출
+      conversationHistory.forEach(msg => {
+        const isUserMsg = msg.role === "user";
+        const msgObj = {
+          text: msg.content,
+          isUser: isUserMsg,
+          timestamp: msg.timestamp
+        };
+        
+        // AI 메시지인 경우 ID와 피드백 정보 추가
+        if (!isUserMsg) {
+          msgObj.message_id = msg.id;
+          msgObj.feedback = null; // 피드백 정보는 별도로 관리
+        }
+        
+        newMessages.push(msgObj);
+      });
+      
+      // 중복 메시지 제거 및 시간순 정렬
+      const uniqueMessages = [];
+      const seenTexts = new Set();
+      
+      // INITIAL_MESSAGE는 항상 포함
+      uniqueMessages.push(INITIAL_MESSAGE);
+      seenTexts.add(INITIAL_MESSAGE.text);
+      
+      // 나머지 메시지들을 시간순으로 정렬하고 중복 제거
+      newMessages
+        .filter(msg => msg !== INITIAL_MESSAGE)
+        .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0))
+        .forEach(msg => {
+          const key = `${msg.isUser}-${msg.text}`;
+          if (!seenTexts.has(key)) {
+            uniqueMessages.push(msg);
+            seenTexts.add(key);
+          }
+        });
+      
+      // 상태 업데이트
+      setMessages(uniqueMessages);
+    }
+  }, [conversationHistory]);
+  
   // 웹소켓 연결 함수
   const connectWebSocket = (sid) => {
     // 기존 웹소켓이 있으면 정리
@@ -246,12 +289,26 @@ const Chat = () => {
         }
       }, 30000);
     };
+    
     ws.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
         
+        // 세션 상태 처리
+        if (data.type === "session_status") {
+          if (data.status === "active" && data.conversation_history) {
+            // 서버로부터 받은 대화 기록 저장
+            setConversationHistory(data.conversation_history);
+          } else if (data.status === "not_found") {
+            // 세션을 찾을 수 없는 경우
+            console.log("세션을 찾을 수 없습니다. 새 세션을 시작합니다.");
+            setSessionId(null);
+            localStorage.removeItem("sessionId");
+            setMessages([INITIAL_MESSAGE]);
+          }
+        }
         // 세션이 만료된 경우 처리
-        if (data.type === "session_expired") {
+        else if (data.type === "session_expired") {
           console.log("세션 만료 메시지 수신:", data.message);
           // 세션 초기화 (새 세션 시작)
           setSessionId(null);
@@ -301,51 +358,65 @@ const Chat = () => {
     };
     
     ws.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    
-    if (data.type === "session_info") {
-      // 세션 정보 처리
-      setSessionId(data.session_id);
-      // 세션 ID 저장 (스트리밍 응답 시)
-      localStorage.setItem("sessionId", data.session_id);
-      userInfoCalledRef.current = false; // userInfo API를 다시 호출할 수 있도록 함
-    }
-    else if (data.type === "message_start") {
-      // 메시지 시작 처리 - ID 저장
-      setCurrentStreamingMessageId(data.message_id);
-      console.log("메시지 ID 설정:", data.message_id);
-    }
-    else if (data.type === "token") {
-      // 토큰 추가
-      setStreamingResponse(prev => prev + data.token);
-    }
-    else if (data.type === "message_end") {
-      // 메시지 완료 처리 - 서버로부터 전달받은 메시지 ID 사용
-      setMessages(prev => [...prev, {
-        text: data.full_response,
-        isUser: false,
-        message_id: data.message_id, // 서버와 동일한 ID 사용
-        feedback: null
-      }]);
-      
-      console.log("메시지 완료, ID:", data.message_id);
-      setStreamingResponse("");
-      setCurrentStreamingMessageId(null);
-      setIsLoading(false);
-      disconnectStreamWebSocket();
-    }
-    else if (data.error) {
-      console.error("스트리밍 오류:", data.error);
-      setIsLoading(false);
-      disconnectStreamWebSocket();
-      
-      // 오류 메시지 표시
-      setMessages(prev => [...prev, {
-        text: "죄송합니다. 현재 연결에 문제가 있습니다. 잠시 후 다시 시도해 주세요.",
-        isUser: false
-      }]);
-    }
-  };
+      try {
+        const data = JSON.parse(event.data);
+        
+        if (data.type === "session_info") {
+          // 세션 정보 처리
+          setSessionId(data.session_id);
+          // 세션 ID 저장 (스트리밍 응답 시)
+          localStorage.setItem("sessionId", data.session_id);
+          userInfoCalledRef.current = false; // userInfo API를 다시 호출할 수 있도록 함
+        }
+        else if (data.type === "user_message_saved") {
+          // 서버에서 사용자 메시지가 저장되었음을 확인
+          console.log(`사용자 메시지 저장 확인: ${data.message_id} - ${data.content}`);
+        }
+        else if (data.type === "message_start") {
+          // 메시지 시작 처리 - ID 저장
+          setCurrentStreamingMessageId(data.message_id);
+          console.log("메시지 ID 설정:", data.message_id);
+        }
+        else if (data.type === "token") {
+          // 토큰 추가
+          setStreamingResponse(prev => prev + data.token);
+        }
+        else if (data.type === "message_end") {
+          // 메시지 완료 처리 - 서버로부터 전달받은 메시지 ID 사용
+          setMessages(prev => [...prev, {
+            text: data.full_response,
+            isUser: false,
+            message_id: data.message_id, // 서버와 동일한 ID 사용
+            feedback: null
+          }]);
+          
+          console.log("메시지 완료, ID:", data.message_id);
+          
+          // 전체 대화 기록 업데이트
+          if (data.conversation_history) {
+            setConversationHistory(data.conversation_history);
+          }
+          
+          setStreamingResponse("");
+          setCurrentStreamingMessageId(null);
+          setIsLoading(false);
+          disconnectStreamWebSocket();
+        }
+        else if (data.error) {
+          console.error("스트리밍 오류:", data.error);
+          setIsLoading(false);
+          disconnectStreamWebSocket();
+          
+          // 오류 메시지 표시
+          setMessages(prev => [...prev, {
+            text: "죄송합니다. 현재 연결에 문제가 있습니다. 잠시 후 다시 시도해 주세요.",
+            isUser: false
+          }]);
+        }
+      } catch (error) {
+        console.error("WebSocket 메시지 처리 오류:", error);
+      }
+    };
     
     ws.onclose = () => {
       console.log("스트리밍 WebSocket 연결 종료");
@@ -359,53 +430,6 @@ const Chat = () => {
     
     streamWebSocketRef.current = ws;
   };
-
-  // 페이지 로드 시 저장된 메시지 복원 및 세션 관리 (수정)
-useEffect(() => {
-  // 세션 ID 로드
-  const savedSessionId = localStorage.getItem("sessionId");
-  if (savedSessionId) {
-    console.log("저장된 세션 ID 사용:", savedSessionId);
-    setSessionId(savedSessionId);
-    
-    // 저장된 메시지 로드
-    const savedMessages = localStorage.getItem("chatMessages");
-    if (savedMessages) {
-      try {
-        const parsedMessages = JSON.parse(savedMessages);
-        setMessages(parsedMessages);
-      } catch (e) {
-        console.error("저장된 메시지 파싱 오류:", e);
-        setMessages([INITIAL_MESSAGE]);
-      }
-    }
-  }
-  
-  // 컴포넌트 언마운트 시 웹소켓 정리
-  return () => {
-    disconnectWebSocket();
-    disconnectStreamWebSocket();
-  };
-}, []);
-
-// 페이지 이탈 시 세션 종료 대신 웹소켓만 정리 (수정)
-useEffect(() => {
-  if (sessionId) {
-    connectWebSocket(sessionId);
-    
-    // 페이지 언로드 시 웹소켓 정리 (세션은 유지)
-    const handleUnload = () => {
-      disconnectWebSocket();
-      disconnectStreamWebSocket();
-      // 세션 종료 요청을 보내지 않음 (세션 유지)
-    };
-    
-    window.addEventListener('beforeunload', handleUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleUnload);
-    };
-  }
-}, [sessionId]);
   
   // 웹소켓 연결 해제 함수
   const disconnectWebSocket = () => {
@@ -452,6 +476,7 @@ useEffect(() => {
     setMessages([INITIAL_MESSAGE]);
     setStreamingResponse("");
     setInputValue("");
+    setConversationHistory([]);
     userInfoCalledRef.current = false;
     
     // 로컬 스토리지 정리
@@ -469,9 +494,16 @@ useEffect(() => {
     e.preventDefault();
     if (!inputValue.trim() || isLoading) return;
     
-    // 사용자 메시지를 대화 기록에 추가
+    // 사용자 메시지를 대화 기록에 추가 (먼저 로컬에 추가)
     const userMessage = inputValue;
-    setMessages(prev => [...prev, { text: userMessage, isUser: true }]);
+    const userMessageObj = { 
+      text: userMessage, 
+      isUser: true,
+      timestamp: Date.now()
+    };
+    
+    // 메시지 목록에 사용자 메시지 추가
+    setMessages(prev => [...prev, userMessageObj]);
     setInputValue("");
     
     // WebSocket 스트리밍 방식 사용
