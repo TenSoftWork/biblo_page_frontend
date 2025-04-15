@@ -182,7 +182,7 @@ const Hero = () => {
             className="mt-10 sm:mt-12 md:mt-14"
           >
             <h6 className="text-center text-[#465478] text-xs sm:text-sm md:text-[14px] font-medium mb-10 sm:mb-6 md:mb-8">
-              ✦ WHERE KNOWLEDGE MEETS CONNECTION ✦
+              ✦ 신뢰받는 기관들과 함께하고 있습니다 ✦
             </h6>
             <div className="relative mx-auto w-full max-w-[800px]">
               <div
