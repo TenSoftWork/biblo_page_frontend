@@ -10,11 +10,6 @@ function generateUniqueId() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 }
 
-export const metadata = {
-  title: '비블로(Biblo) - 도서관을 위한 AI 에이전트',
-  description: '비블로(Biblo)와 대화하며 도서관과 학술정보 AI 에이전트트에 대해 궁금한 점을 물어보세요.',
-};
-
 const INITIAL_MESSAGE = {
   id: "initial-message", // 고유 ID 추가
   text: "비블로(Biblo)와 관련하여 궁금하신 점이 있으시면 편하게 질문해 주세요 👋",
