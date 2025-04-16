@@ -66,13 +66,11 @@ const HowItWorks = () => {
                 Lib-BERT
               </h6>
               <p className="text-[#545C9E] text-base text-left">
-                AI기반 학술 정보 질의 분석
+                학술 정보 검색 및 질의 분석
               </p>
               <ul className="text-[#545C9E] text-base list-disc text-left pl-4 space-y-2 mt-2">
-                <li>
-                  시맨틱 검색을 통해 연구 및 학습 관련 정보를 정확 하게 탐색
-                </li>
-                <li>사전 학습된 데이터로 질 문 유형을 분석 및 분류</li>
+                <li>시맨틱 검색을 통해 연구 및 학습 관련 정보를 정확하게 탐색</li>
+                <li>사전 학습된 데이터를 활용하여 사용자의 질문 유형을 분석</li>
               </ul>
             </div>
           </div>
@@ -114,13 +112,11 @@ const HowItWorks = () => {
                 Lib-Career
               </h6>
               <p className="text-[#545C9E] text-base text-left">
-                AI 기반 진로 및 취업 지원
+                맞춤형 진로 및 취업 정보 제공
               </p>
               <ul className="text-[#545C9E] text-base list-disc text-left pl-4 space-y-2 mt-2">
-                <li>
-                  도서 대출 이력과 졸업생 취업 데이터를 연계하여 맞춤형 정보 제공
-                </li>
-                <li>연구 및 학습 분야별 진로 탐색 지원</li>
+                <li>도서 대출 이력과 취업 데이터를 분석하여 맞춤형 정보 제공</li>
+                <li>연구 및 학습 분야별 진로 및 취업 탐색 정보 제공</li>
               </ul>
             </div>
           </div>
@@ -162,13 +158,11 @@ const HowItWorks = () => {
                 Lib-Assist
               </h6>
               <p className="text-[#545C9E] text-base text-left">
-                도서관 서비스 AI 응답 시스템
+                도서관 서비스 자동 응답 시스템
               </p>
               <ul className="text-[#545C9E] text-base list-disc text-left pl-4 space-y-2 mt-2">
-                <li>
-                  대출 연장, 반납 규정, 시설 예약 등 도서관 서비스 질의 자동 처리
-                </li>
-                <li>반복적인 질문에 대해 AI가 실시간 응답</li>
+                <li>도서 대출 연장, 시설 예약 등 도서관 서비스 관련 질의 자동 응답</li>
+                <li>자주 발생하는 반복적인 질문에 AI가 실시간으로 정확히 응답</li>
               </ul>
             </div>
           </div>
@@ -210,13 +204,11 @@ const HowItWorks = () => {
                 Lib-Recommend
               </h6>
               <p className="text-[#545C9E] text-base text-left">
-                개인 맞춤형 학습 자료 추천
+                 개인 맞춤형 학습 자료 추천
               </p>
               <ul className="text-[#545C9E] text-base list-disc text-left pl-4 space-y-2 mt-2">
-                <li>
-                  사용자의 수강 이력 및 대출 데이터를 분석하여 최적의 학습 자료 제공
-                </li>
-                <li>연구 및 학습 심화를 위한 AI 기반 콘텐츠 추천</li>
+                <li>수강 이력 및 도서 대출 데이터를 기반으로 맞춤형 학습 자료 제공</li>
+                <li>연구 및 학습 심화를 위한 개인 맞춤형 AI 콘텐츠 추천 제공</li>
               </ul>
             </div>
           </div>
