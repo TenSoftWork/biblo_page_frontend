@@ -5,6 +5,11 @@ import Image from "next/image";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 
+export const metadata = {
+  title: '비블로(Biblo) - 도서관을 위한 AI 에이전트',
+  description: '비블로(Biblo)와 대화하며 도서관과 학술정보 AI 에이전트트에 대해 궁금한 점을 물어보세요.',
+};
+
 const INITIAL_MESSAGE = {
   text: "비블로(Biblo)와 관련하여 궁금하신 점이 있으시면 편하게 질문해 주세요 👋",
   isUser: false,
