@@ -1,9 +1,7 @@
 name: CI/CD for my-frontend
-
 on:
   push:
     branches: [ "main" ]
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -11,19 +9,28 @@ jobs:
       # 1) 체크아웃
       - name: Check out code
         uses: actions/checkout@v2
-
+      
       # 2) Docker 로그인
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
+      
       # 3) Docker 이미지 빌드 및 푸시
       - name: Build and push
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-frontend:latest .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-frontend:latest
       
-      - name: Trigger jenkins Deployment
-        run: |
-          curl -X POST "http://112.219.163.139:8080/job/biblo_frontend/build?token=111e7e952b6233a6fe96674f5e36e27ec8" \
-          -H "Jenkins-Crumb: 8e15b7ee093496da0206524b84410ec5efe6f37b73cc7726604a3af943239d1f" \
-          -u tsw_jenkins:111e7e952b6233a6fe96674f5e36e27ec8
+      # 4) SSH를 통한 Jenkins 작업 트리거
+      - name: Trigger Jenkins via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: 112.219.163.139
+          port: 1398
+          username: kjm
+          key: ${{ secrets.JENKINS_SSH_PRIVATE_KEY }}
+          script: |
+            # Jenkins 크럼브(CSRF 토큰) 가져오기
+            CRUMB=$(curl -s 'http://localhost:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)' -u tsw_jenkins:11255b2c8b4064d1325ba36522e5d01c6b)
+            
+            # 올바른 작업 이름으로 빌드 트리거
+            curl -X POST "http://localhost:8080/job/Biblo_hompage_FE/build?token=11255b2c8b4064d1325ba36522e5d01c6b" -H "$CRUMB" -u tsw_jenkins:11255b2c8b4064d1325ba36522e5d01c6b
