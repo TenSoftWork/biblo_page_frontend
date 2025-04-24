@@ -20,7 +20,7 @@ export const metadata = {
     siteName: 'Biblo AI',
     images: [
       {
-        url: '/og-image.png',
+        url: '/meta_logo.jpg',
         width: 1200,
         height: 630,
         alt: 'Biblo AI',
@@ -33,7 +33,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: '비블로(Biblo) - 도서관을 위한 AI 에이전트',
     description: '비블로(Biblo)는 도서관과 학술 정보를 위한 AI 에이전트입니다.',
-    images: ['/twitter-image.png'],
+    images: ['/meta_logo.jpg'],
   },
   robots: {
     index: true,
