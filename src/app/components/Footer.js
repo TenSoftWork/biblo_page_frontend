@@ -253,7 +253,7 @@ const Footer = () => {
                   최신 소식을 빠르게 전달받으세요.
                 </p>
                 <p className="text-white/90 text-base sm:text-lg mb-4">
-                  contact@biblo.ai
+                  contact@tensoftworks.com
                 </p>
                 <form onSubmit={handleSubmit} className="flex gap-2 mb-6 sm:mb-8">
                   <div className="relative">
