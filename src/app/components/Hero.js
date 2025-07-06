@@ -37,7 +37,7 @@ const Hero = () => {
                 BIBLO
               </span>
               <span className="font-medium text-[#7584D6]">
-                AUTOMATED SEMANTIC METADATA INFRASTRUCTURE
+                SEMANTIC METADATA INFRA
               </span>
             </motion.div>
 
@@ -50,7 +50,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="heading text-[#465478] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  Transform
+                  Extend
                 </motion.h1>
                 <motion.h1
                   initial={{ opacity: 0, x: -20 }}
@@ -108,7 +108,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.7 }}
                   className="heading text-[#4D6B8D] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  Semantic Database
+                  Semantic Metadata
                 </motion.h1>
               </div>
             </div>
@@ -120,9 +120,9 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.8 }}
               className="text-[#465478] text-lg max-w-2xl break-keep my-8 mx-auto px-16 sm:px-4"
             >
-              비블로(Biblo)는 고객 데이터를 AI가 이해할 수 있도록 구조화하고, 의미 기반 검색이 가능하도록 
+              비블로(Biblo)는 고객 데이터를 AI가 이해할 수 있도록 구조화하고, 
               <br className="hidden sm:block"></br>
-              자동화된 시맨틱 메타데이터 파이프라인을 제공합니다.
+              의미 기반 검색이 가능하도록 자동화된 시맨틱 메타데이터 파이프라인을 제공합니다.
             </motion.p>
 
             {/* CTA Buttons */}
