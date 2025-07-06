@@ -37,7 +37,7 @@ const Hero = () => {
                 BIBLO
               </span>
               <span className="font-medium text-[#7584D6]">
-                FROM METADATA TO MEANING
+                AUTOMATED SEMANTIC METADATA INFRASTRUCTURE
               </span>
             </motion.div>
 
@@ -50,7 +50,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="heading text-[#465478] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  Redefine
+                  Transform
                 </motion.h1>
                 <motion.h1
                   initial={{ opacity: 0, x: -20 }}
@@ -58,7 +58,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.4 }}
                   className="heading text-[#7584D6] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  Knowledge Exploration
+                  Your Data into
                 </motion.h1>
               </div>
 
@@ -69,7 +69,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="heading text-[#446080] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  with the
+                  AI-Ready
                 </motion.h1>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -108,7 +108,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.7 }}
                   className="heading text-[#4D6B8D] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  Semantic Search Solution 
+                  Semantic Database
                 </motion.h1>
               </div>
             </div>
@@ -120,10 +120,9 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.8 }}
               className="text-[#465478] text-lg max-w-2xl break-keep my-8 mx-auto px-16 sm:px-4"
             >
-              비블로(Biblo)는 도서 및 학술 데이터에 특화된 메타데이터 재구성 및 의미 기반 검색 솔루션입니다. 
+              비블로(Biblo)는 고객 데이터를 AI가 이해할 수 있도록 구조화하고, 의미 기반 검색이 가능하도록 
               <br className="hidden sm:block"></br>
-              도서·논문·기타 콘텐츠 등 흩어진 정보를 통합하고,
-              메터데이터 재구조화·벡터화를 통해 의미 기반 탐색과 추천을 가능하게 합니다.
+              자동화된 시맨틱 메타데이터 파이프라인을 제공합니다.
             </motion.p>
 
             {/* CTA Buttons */}

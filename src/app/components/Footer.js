@@ -84,16 +84,16 @@ const Footer = () => {
   };
 
   const marqueeItems = [
-    "AI 기반 자료 분류",
-    "메타데이터 구조화",
-    "문맥 기반 탐색",
-    "지식 맥락 연결",
-    "개인화된 정보 추천",
-    "이용 행태 분석",
-    "검색 흐름 최적화",
-    "도서관 시스템 연동",
-    "연구 흐름 지원",
-    "차세대 정보 서비스",
+    "시맨틱 메타데이터 생성",
+    "벡터화 및 의미 인덱싱",
+    "자동화된 유지관리 파이프라인",
+    "검색 인프라 제공",
+    "고객 시스템 연동 최적화",
+    "데이터 소유권 보장",
+    "지속 운영 지원",
+    "SaaS 형태 제공",
+    "AI-ready 데이터베이스",
+    "의미 기반 검색",
   ];
 
   const scrollToTop = () => {
@@ -124,14 +124,15 @@ const Footer = () => {
 
             {/* Text Content */}
             <h2 className="text-4xl sm:text-7xl text-white mb-10">
-              Ready to Elevate 
-              <br />Your Research?
+              Ready to Transform 
+              <br />Your Data?
             </h2>
             <p className="text-white/90 text-base sm:text-lg max-w-2xl mb-6 sm:mb-8 break-keep">
-              비블로(Biblo)는 도서관, 연구자, 학습자를 위한 AI 에이전트입니다.  
-              흩어져 있는 학술 정보와 메타데이터를 정밀하게 구조화하고,  
-              개인의 탐색 흐름에 맞춰 의미 있는 지식으로 재구성합니다.  
-              단순한 검색을 넘어, 실제 학습과 연구에 바로 적용 가능한 정보로 전환합니다.
+              Biblo는 고객 데이터를 AI가 이해할 수 있도록 구조화하고, 의미 기반 검색이 가능하도록 
+              <br className="hidden sm:block"></br>
+              자동화된 시맨틱 메타데이터 파이프라인을 제공합니다. 
+              <br className="hidden sm:block"></br>
+              단발성 구축이 아닌, 지속 운영되는 AI 검색 기반을 제공합니다.
             </p>
 
             {/* Buttons */}
@@ -237,9 +238,9 @@ const Footer = () => {
                 className="mb-4 sm:mb-6"
               />
               <p className="text-white/90 text-base sm:text-lg">
-                도서관 데이터를 넘어,
+                데이터를 넘어,
                 <br />
-                지식의 흐름까지 탐색합니다.
+                의미의 연결로 전환합니다.
               </p>
             </div>
 
