@@ -37,7 +37,7 @@ const Hero = () => {
                 BIBLO
               </span>
               <span className="font-medium text-[#7584D6]">
-                BUILT FOR LIBRARIES
+                FROM METADATA TO MEANING
               </span>
             </motion.div>
 
@@ -58,7 +58,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.4 }}
                   className="heading text-[#7584D6] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  Search and Learning
+                  Knowledge Exploration
                 </motion.h1>
               </div>
 
@@ -108,7 +108,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.7 }}
                   className="heading text-[#4D6B8D] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  AI Agent
+                  Semantic Search Solution 
                 </motion.h1>
               </div>
             </div>
@@ -120,10 +120,10 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.8 }}
               className="text-[#465478] text-lg max-w-2xl break-keep my-8 mx-auto px-16 sm:px-4"
             >
-              비블로(Biblo)는 도서관과 학술 정보를 위한 AI 에이전트입니다. 
+              비블로(Biblo)는 도서 및 학술 데이터에 특화된 메타데이터 재구성 및 의미 기반 검색 솔루션입니다. 
               <br className="hidden sm:block"></br>
-              검색부터 연구·진로 추천까지,  
-              서비스 운영 전반을 하나로 연결하고 자동화합니다.
+              도서·논문·기타 콘텐츠 등 흩어진 정보를 통합하고,
+              메터데이터 재구조화·벡터화를 통해 의미 기반 탐색과 추천을 가능하게 합니다.
             </motion.p>
 
             {/* CTA Buttons */}
