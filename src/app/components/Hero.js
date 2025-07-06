@@ -50,7 +50,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="heading text-[#465478] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  Extend Your Data into 
+                  Transform Your Data into 
                 </motion.h1>
                 <motion.h1
                   initial={{ opacity: 0, x: -20 }}
