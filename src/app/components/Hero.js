@@ -50,7 +50,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="heading text-[#465478] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  Extend
+                  Extend Your Data into 
                 </motion.h1>
                 <motion.h1
                   initial={{ opacity: 0, x: -20 }}
@@ -58,7 +58,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.4 }}
                   className="heading text-[#7584D6] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  Your Data into
+                  AI-Ready
                 </motion.h1>
               </div>
 
@@ -69,7 +69,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="heading text-[#446080] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  AI-Ready
+                  the
                 </motion.h1>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
