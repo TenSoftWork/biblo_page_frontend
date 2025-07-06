@@ -69,7 +69,7 @@ const Hero = () => {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="heading text-[#446080] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
-                  the
+                  Semantic Metadata with
                 </motion.h1>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -102,14 +102,14 @@ const Hero = () => {
                     <div className="absolute inset-0 bg-white/30 rounded-[56px] -z-10" />
                   </motion.div>
                 </motion.div>
-                <motion.h1
+{/*                 <motion.h1
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.7 }}
                   className="heading text-[#4D6B8D] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
                 >
                   Semantic Metadata
-                </motion.h1>
+                </motion.h1> */}
               </div>
             </div>
 
