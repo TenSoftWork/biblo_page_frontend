@@ -18,13 +18,13 @@ const HowItWorks = () => {
         <div className="w-10 h-[1px] bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] mx-auto mb-8 sm:mb-12"></div>
         <h3 className="text-4xl md:text-6xl font-medium mb-6 px-3">
           <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent">
-            Biblo AI Agent
+            자동화된 파이프라인
           </span>
         </h3>
         <p className="text-[#465478] max-w-2xl mx-auto text-lg px-3 break-keep">
-        도서관 데이터를 구조화하고,  
-        사용자의 탐색 흐름을 이해해  
-        지식의 맥락까지 연결합니다.
+          고객 데이터를 AI가 이해할 수 있도록 구조화하고, 
+          <br className="hidden sm:block"></br>
+          의미 기반 검색이 가능하도록 자동으로 유지·관리합니다.
         </p>
       </div>
 
@@ -39,7 +39,7 @@ const HowItWorks = () => {
           viewport={{ once: true }}
         >
           <div className="w-28 sm:w-32 h-12 rounded-full bg-[#f1f2f9] flex items-center justify-center">
-            <h6 className="text-[#545C9E] font-normal text-2xl">Point 1</h6>
+            <h6 className="text-[#545C9E] font-normal text-2xl">Step 1</h6>
           </div>
 
           <div className="absolute inset-0 opacity-10">
@@ -55,7 +55,7 @@ const HowItWorks = () => {
             <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 sm:mb-8 relative">
               <Image
                 src="https://framerusercontent.com/images/T4WPBy86OK9JDni3k91xLjIeM.svg"
-                alt="Lib-BERT"
+                alt="Data Collection"
                 fill
                 className="object-contain"
               />
@@ -63,14 +63,14 @@ const HowItWorks = () => {
 
             <div className="text-center">
               <h6 className="text-[#6A71A8] font-medium text-xl mb-4">
-                Lib-BERT
+                데이터 수집 및 전처리
               </h6>
               <p className="text-[#545C9E] text-base text-left">
-                학술 정보 검색 및 질의 분석
+                고객의 기존 콘텐츠를 자동으로 수집하고 정제합니다
               </p>
               <ul className="text-[#545C9E] text-base list-disc text-left pl-4 space-y-2 mt-2">
-                <li>시맨틱 검색을 통해 연구 및 학습 관련 정보를 정확하게 탐색</li>
-                <li>사전 학습된 데이터를 활용하여 사용자의 질문 유형을 분석</li>
+                <li>도서관 포털, LMS, 리포지터리 등 다양한 소스에서 데이터 수집</li>
+                <li>중복 제거, 형식 통일 등 전처리 작업 자동화</li>
               </ul>
             </div>
           </div>
@@ -85,7 +85,7 @@ const HowItWorks = () => {
           viewport={{ once: true }}
         >
           <div className="w-28 sm:w-32 h-12 rounded-full bg-[#f1f2f9] flex items-center justify-center">
-            <h6 className="text-[#545C9E] font-normal text-2xl">Point 2</h6>
+            <h6 className="text-[#545C9E] font-normal text-2xl">Step 2</h6>
           </div>
 
           <div className="absolute inset-0 opacity-10">
@@ -101,7 +101,7 @@ const HowItWorks = () => {
             <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 sm:mb-8 relative">
               <Image
                 src="https://framerusercontent.com/images/nELWKm9Mmf4Dtirj6HehxfPoDBU.svg"
-                alt="Lib-Career"
+                alt="Metadata Generation"
                 fill
                 className="object-contain"
               />
@@ -109,14 +109,14 @@ const HowItWorks = () => {
 
             <div className="text-center">
               <h6 className="text-[#6A71A8] font-medium text-xl mb-4">
-                Lib-Career
+                시맨틱 메타데이터 생성
               </h6>
               <p className="text-[#545C9E] text-base text-left">
-                맞춤형 진로 및 취업 정보 제공
+                AI가 이해할 수 있도록 요약, 태깅, 주제 분류 등 구조화
               </p>
               <ul className="text-[#545C9E] text-base list-disc text-left pl-4 space-y-2 mt-2">
-                <li>도서 대출 이력과 취업 데이터를 분석하여 맞춤형 정보 제공</li>
-                <li>연구 및 학습 분야별 진로 및 취업 탐색 정보 제공</li>
+                <li>콘텐츠 요약 및 핵심 키워드 추출</li>
+                <li>주제 분류 및 관련성 태깅 자동 생성</li>
               </ul>
             </div>
           </div>
@@ -131,7 +131,7 @@ const HowItWorks = () => {
           viewport={{ once: true }}
         >
           <div className="w-28 sm:w-32 h-12 rounded-full bg-[#f1f2f9] flex items-center justify-center">
-            <h6 className="text-[#545C9E] font-normal text-2xl">Point 3</h6>
+            <h6 className="text-[#545C9E] font-normal text-2xl">Step 3</h6>
           </div>
 
           <div className="absolute inset-0 opacity-10">
@@ -147,7 +147,7 @@ const HowItWorks = () => {
             <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 sm:mb-8 relative">
               <Image
                 src="https://framerusercontent.com/images/7rrCaekOoILCIdaxzb5TqlARuE.svg"
-                alt="Lib-Assist"
+                alt="Vectorization"
                 fill
                 className="object-contain"
               />
@@ -155,14 +155,14 @@ const HowItWorks = () => {
 
             <div className="text-center">
               <h6 className="text-[#6A71A8] font-medium text-xl mb-4">
-                Lib-Assist
+                벡터화 및 인덱싱
               </h6>
               <p className="text-[#545C9E] text-base text-left">
-                도서관 서비스 자동 응답 시스템
+                문맥/의도 기반 탐색 가능한 벡터 DB 구축
               </p>
               <ul className="text-[#545C9E] text-base list-disc text-left pl-4 space-y-2 mt-2">
-                <li>도서 대출 연장, 시설 예약 등 도서관 서비스 관련 질의 자동 응답</li>
-                <li>자주 발생하는 반복적인 질문에 AI가 실시간으로 정확히 응답</li>
+                <li>고성능 벡터 데이터베이스에 시맨틱 인덱스 구축</li>
+                <li>의미 기반 유사도 검색을 위한 임베딩 생성</li>
               </ul>
             </div>
           </div>
@@ -177,7 +177,7 @@ const HowItWorks = () => {
           viewport={{ once: true }}
         >
           <div className="w-28 sm:w-32 h-12 rounded-full bg-[#f1f2f9] flex items-center justify-center">
-            <h6 className="text-[#545C9E] font-normal text-2xl">Point 4</h6>
+            <h6 className="text-[#545C9E] font-normal text-2xl">Step 4</h6>
           </div>
 
           <div className="absolute inset-0 opacity-10">
@@ -193,7 +193,7 @@ const HowItWorks = () => {
             <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 sm:mb-8 relative">
               <Image
                 src="https://framerusercontent.com/images/vfCWe8jjf75uvUu7vyzDzC4JLU.svg"
-                alt="Lib-Recommend"
+                alt="Search Infrastructure"
                 fill
                 className="object-contain"
               />
@@ -201,14 +201,14 @@ const HowItWorks = () => {
 
             <div className="text-center">
               <h6 className="text-[#6A71A8] font-medium text-xl mb-4">
-                Lib-Recommend
+                검색 인프라 제공
               </h6>
               <p className="text-[#545C9E] text-base text-left">
-                 개인 맞춤형 학습 자료 추천
+                API, 웹 UI 형태로 의미 기반 검색 기능을 쉽게 통합
               </p>
               <ul className="text-[#545C9E] text-base list-disc text-left pl-4 space-y-2 mt-2">
-                <li>수강 이력 및 도서 대출 데이터를 기반으로 맞춤형 학습 자료 제공</li>
-                <li>연구 및 학습 심화를 위한 개인 맞춤형 AI 콘텐츠 추천 제공</li>
+                <li>RESTful API를 통한 검색 기능 제공</li>
+                <li>웹 인터페이스 및 기존 시스템 연동 지원</li>
               </ul>
             </div>
           </div>
@@ -216,12 +216,12 @@ const HowItWorks = () => {
       </div>
 
       {/* CTA */}
-{/*       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 p-6 md:p-8 border-t border-[#6A71A8]/20 mt-8 md:mt-12">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 p-6 md:p-8 border-t border-[#6A71A8]/20 mt-8 md:mt-12">
         <p className="text-[#6A71A8] text-base md:text-lg text-center">
-          기존 학술 데이터베이스 및 도서관 시스템과 연동을 지원합니다.{" "}
+          새로운 콘텐츠가 등록될 때마다 자동으로 메타데이터를 업데이트하고 벡터화합니다.{" "}
         </p>
-        <AnimatedButton href="/contact#top">Ask Our AI Agent</AnimatedButton>
-      </div> */}
+        <AnimatedButton href="/contact#top">Try Biblo</AnimatedButton>
+      </div>
     </section>
   );
 };

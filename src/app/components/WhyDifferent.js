@@ -113,14 +113,15 @@ const WhyDifferent = () => {
             <div className="mb-12 md:mb-20">
               <h3 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-4 md:mb-6 text-center md:text-left">
                 <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent text-center md:text-left w-full block">
-                  How Biblo is Different
+                  Why Choose Biblo
                 </span>
               </h3>
               <p className="text-[#465478] text-lg max-w-2xl break-keep text-left">
-                비블로(Biblo)는 검색, 분류, 추천, 분석 등  
-                도서관의 다양한 기능을 하나의 AI 에이전트로 통합합니다.  
-                여러 솔루션을 따로 조합하지 않아도,  
-                연구자와 사서를 위한 핵심 기능이 비블로 하나에 모두 담겨 있습니다.
+                비블로(Biblo)는 단순한 검색 솔루션이 아니라, 도서관·연구기관·교육기관이 보유한 
+                <br className="hidden md:block"></br>
+                콘텐츠를 AI-ready 데이터베이스로 전환하고, 이를 기반으로 검색 API와 
+                <br className="hidden md:block"></br>
+                검색 UI를 서비스 형태로 제공합니다.
               </p>
             </div>
 
@@ -147,9 +148,11 @@ const WhyDifferent = () => {
             <div className="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-20">
               <div className="w-full md:w-[30%]">
                 <p className="text-[#465478] text-lg max-w-2xl break-keep text-left">
-                검색 기능에 그치지 않고,  
-                분류, 추천, 분석, 도서관 서비스 자동화까지 포함하여  
-                실제 연구자의 탐색 과정과 학술 활동 전반을 유기적으로 지원합니다.
+                단발성 구축이 아닌, 지속 운영되는 AI 검색 기반을 제공합니다. 
+                <br className="hidden md:block"></br>
+                고객이 따로 관리하지 않아도 AI 검색 품질이 지속적으로 유지되며, 
+                <br className="hidden md:block"></br>
+                비블로(Biblo)는 백엔드에서 메타데이터 상태를 항상 최신화합니다.
                 </p>
               </div>
               <div className="w-full md:w-[70%] relative">
@@ -226,7 +229,7 @@ const WhyDifferent = () => {
             {/* CTA */}
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 py-8 md:p-8 border-t border-[#6A71A8]/20 mt-8 md:my-20">
               <p className="text-[#465478] text-lg max-w-2xl break-keep text-center md:text-left w-full md:w-[50%]">
-              도서관 데이터를 이해하는 AI, 연구로 곧바로 이어집니다.
+              원본 콘텐츠 및 소유권은 전적으로 고객에게 있으며, 비블로(Biblo)는 메타데이터 처리와 검색 인프라만 제공합니다.
               </p>
               <div className="w-full md:w-[40%] text-center md:text-right">
                 <AnimatedButton href="/chat" className="w-[160px]">Try Biblo</AnimatedButton>

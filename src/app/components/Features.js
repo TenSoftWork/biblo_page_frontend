@@ -6,6 +6,22 @@ import Image from "next/image";
 const Features = () => {
   return (
     <section className="pb-16 md:pb-32" id="features">
+      {/* Header */}
+      <div className="text-center mb-12 md:mb-20 max-w-7xl mx-auto px-4">
+        <h6 className="text-[#6A71A8] text-base tracking-[0.2em] font-medium mb-3">
+          CORE FEATURES
+        </h6>
+        <div className="w-10 h-[1px] bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] mx-auto mb-8 sm:mb-12"></div>
+        <h3 className="text-4xl md:text-6xl font-medium mb-6 px-3">
+          <span className="bg-gradient-to-r from-[#0DCFFF] via-[#545c9e] to-[#545c9e] bg-[length:120%] bg-clip-text text-transparent">
+            비블로(Biblo)의 핵심 가치
+          </span>
+        </h3>
+        <p className="text-[#465478] max-w-2xl mx-auto text-lg px-3 break-keep">
+          고객 데이터를 시맨틱 DB로 바꿔주고, 그 상태를 자동으로 유지시켜주는 검색 인프라
+        </p>
+      </div>
+
       {/* Grid Section */}
       <div className="text-center mb-12 md:mb-20 max-w-7xl mx-auto px-4 md:px-0">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -22,11 +38,15 @@ const Features = () => {
                 <div className="aspect-12/16 md:aspect-10/16 w-[100%] md:w-[100%] relative">
                   <Image
                     src="/bento_1.png"
-                    alt="AI Model 3"
+                    alt="Semantic Metadata Generation"
                     fill
                     className="object-contain"
                   />
                 </div>
+                <h4 className="text-lg font-semibold text-[#5967B5] mt-4 mb-2">시맨틱 메타데이터 생성</h4>
+                <span className="text-md md:text-md font-normal text-[#5967B5] text-left">
+                  AI가 이해할 수 있도록 요약, 태깅, 주제 분류 등 구조화된 메타데이터를 자동으로 생성합니다.
+                </span>
               </div>
             </div>
           </motion.div>
@@ -44,14 +64,14 @@ const Features = () => {
                 <div className="aspect-square w-[50%] relative">
                   <Image
                     src="/features_image_1.png"
-                    alt="AI Model 3"
+                    alt="Vectorization"
                     fill
                     className="object-contain"
                   />
                 </div>
+                <h4 className="text-lg font-semibold text-[#5967B5] mt-4 mb-2">벡터화 및 의미 인덱싱</h4>
                 <span className="text-md md:text-md font-normal text-[#5967B5] text-left">
-                  Biblo는 책을 의미 기반 Work 단위로 자료를 묶어 새로운 경험의
-                  검색결과를 제공합니다.
+                  문맥/의도 기반 탐색이 가능한 벡터 DB를 구축합니다.
                 </span>
               </div>
             </div>
@@ -69,13 +89,14 @@ const Features = () => {
                 <div className="aspect-16/9 w-[100%] relative">
                   <Image
                     src="/features_image_2.png"
-                    alt="Integration Templates"
+                    alt="Automated Pipeline"
                     fill
                     className="object-contain"
                   />
                 </div>
+                <h4 className="text-lg font-semibold text-[#5967B5] mt-4 mb-2">자동화된 유지관리 파이프라인</h4>
                 <span className="text-md md:text-md font-normal text-[#5967B5] text-center">
-                  검색 → 대출 → 현장 이용까지<br></br>연결되는 오프라인-온라인 융합
+                  새로운 콘텐츠가 등록될 때마다 자동으로 메타데이터를 업데이트하고 벡터화합니다.
                 </span>
               </div>
             </div>
@@ -93,16 +114,14 @@ const Features = () => {
                 <div className="aspect-16/9 w-[100%] relative">
                   <Image
                     src="/features_image_3.png"
-                    alt="Bars"
+                    alt="Search Infrastructure"
                     fill
                     className="object-contain"
                   />
                 </div>
+                <h4 className="text-lg font-semibold text-[#5967B5] mt-4 mb-2">검색 인프라 제공</h4>
                 <span className="text-md md:text-md font-normal text-[#5967B5] text-left">
-                  RAG 파이프라인 구성(데이터 전처리 → 벡터화 → 문서 스코어링 →
-                  LLM 인퍼런스) 및 최적화 기술, 기관별 데이터(학과별 시험자료,
-                  취업정보 등)를 연동해 사용자 맞춤 답변을 생성하는 특화
-                  알고리즘 적용
+                  API, 웹 UI 형태로 의미 기반 검색 기능을 쉽게 통합할 수 있도록 제공합니다.
                 </span>
               </div>
             </div>
@@ -120,16 +139,14 @@ const Features = () => {
                 <div className="aspect-16/9 w-[100%] relative">
                   <Image
                     src="/features_image_4.png"
-                    alt="Bars"
+                    alt="System Integration"
                     fill
                     className="object-contain"
                   />
                 </div>
+                <h4 className="text-lg font-semibold text-[#5967B5] mt-4 mb-2">고객 시스템 연동 최적화</h4>
                 <span className="text-md md:text-md font-normal text-[#5967B5] text-left">
-                  간단한 키워드를 넘어 복잡한 문장형 질문까지 처리 가능
-                  비블로(Biblo)는  일반적인 AI 검색 엔진이 아니라, 사용자 맥락을
-                  분석하고 개인 맞춤형 추천 및 상담까지 수행하는 능동적 AI
-                  에이전트{" "}
+                  도서관 포털, LMS, 리포지터리 등에 붙이기 쉬운 구조로 JSON 기반 응답을 제공합니다.
                 </span>
               </div>
             </div>
@@ -147,11 +164,15 @@ const Features = () => {
                 <div className="aspect-square w-[100%] relative">
                   <Image
                     src="/bento_6.png"
-                    alt="Text Box"
+                    alt="Data Ownership"
                     fill
                     className="object-contain"
                   />
                 </div>
+                <h4 className="text-lg font-semibold text-[#5967B5] mt-4 mb-2">데이터 소유권 보장</h4>
+                <span className="text-md md:text-md font-normal text-[#5967B5] text-center">
+                  원본 콘텐츠 및 소유권은 전적으로 고객에게 있으며, Biblo는 메타데이터 처리와 검색 인프라만 제공합니다.
+                </span>
               </div>
             </div>
           </motion.div>
@@ -168,11 +189,15 @@ const Features = () => {
                 <div className="aspect-square w-[100%] relative">
                   <Image
                     src="/bento_7.png"
-                    alt="Text Box"
+                    alt="Continuous Operation"
                     fill
                     className="object-contain"
                   />
                 </div>
+                <h4 className="text-lg font-semibold text-[#5967B5] mt-4 mb-2">지속 운영 지원</h4>
+                <span className="text-md md:text-md font-normal text-[#5967B5] text-center">
+                  단발성 구축이 아닌, 지속 운영되는 AI 검색 기반을 제공하여 고객이 따로 관리하지 않아도 AI 검색 품질이 지속적으로 유지됩니다.
+                </span>
               </div>
             </div>
           </motion.div>
@@ -189,13 +214,14 @@ const Features = () => {
                 <div className="aspect-16/12 w-[100%] relative">
                   <Image
                     src="/features_image_5.png"
-                    alt="Text Box"
+                    alt="SaaS Platform"
                     fill
                     className="object-contain"
                   />
                 </div>
+                <h4 className="text-lg font-semibold text-[#5967B5] mt-4 mb-2">SaaS 형태 제공</h4>
                 <span className="text-md md:text-md font-normal text-[#5967B5] text-center">
-                  개인 맞춤형 연구 홍보 동영상/SHORTS<br></br>(Personalized Academic Reports)
+                  SaaS 형태로 제공되며, 전용 인스턴스 및 온프레미스 옵션도 협의 가능합니다.
                 </span>
               </div>
             </div>
