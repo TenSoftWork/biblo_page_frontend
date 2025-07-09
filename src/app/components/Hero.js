@@ -123,7 +123,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.8 }}
               className="text-[#465478] text-lg max-w-2xl break-keep my-8 mx-auto px-16 sm:px-4"
             >
-              비블로(Biblo)는 I가 이해할 수 있는 형태로 고객의 데이터를 구조화하고,{" "}<br className="hidden sm:block"></br>
+              비블로(Biblo)는 AI가 이해할 수 있는 형태로 고객의 데이터를 구조화하고,{" "}<br className="hidden sm:block"></br>
               이를 바탕으로 고품질 의미 기반 검색 환경을 구축하는 솔루션입니다.
             </motion.p>
 
