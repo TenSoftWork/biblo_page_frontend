@@ -126,7 +126,7 @@ const Hero = () => {
               className="flex  sm:flex-row items-center justify-center gap-2.5 sm:gap-3 md:gap-4 px-3 sm:px-4"
             >
               <AnimatedButton href="/contact#top" className="w-[160px]">
-                Try Biblo
+                시맨틱 검색 체험
               </AnimatedButton>
               <motion.button
                 className={`relative rounded-full font-medium overflow-hidden bg-white border border-[#6A71A8]/20 shadow-lg w-[160px]`}
