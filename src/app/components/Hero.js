@@ -71,7 +71,7 @@ const Hero = () => {
                   className="heading text-[#446080] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight text-center"
                 >
                   <span className="block sm:inline">Semantic Metadata</span>
-                  <span className="block sm:inline"> through </span>
+                  <span className="inline"> through </span>
                   <motion.span
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
