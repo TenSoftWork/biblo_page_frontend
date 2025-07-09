@@ -63,29 +63,20 @@ const Hero = () => {
                 </motion.h1>
               </div>
 
-              <div className="flex flex-col items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4">
+              <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4">
                 <motion.h1
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="heading text-[#446080] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight text-center"
                 >
-                  Semantic Metadata
-                </motion.h1>
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                  className="flex items-center justify-center gap-2"
-                >
-                  <span className="heading text-[#446080] text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight">
-                    through
-                  </span>
-                  <motion.div
+                  <span className="block sm:inline">Semantic Metadata</span>
+                  <span className="block sm:inline"> through </span>
+                  <motion.span
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.7 }}
-                    className="relative rounded-[56px] backdrop-blur-[5px]"
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    className="relative rounded-[56px] backdrop-blur-[5px] inline-block"
                     style={{ perspective: "1200px" }}
                   >
                     <motion.div
@@ -100,19 +91,19 @@ const Hero = () => {
                       style={{ transformStyle: "preserve-3d" }}
                       className="relative border-2 border-[#7584D6]/80 rounded-[56px] px-3 sm:px-4 md:px-6 py-1 sm:py-1.5 md:py-2"
                     >
-                      <h1
-                        className="font-medium bg-gradient-to-r from-[#80E5FF] to-[#7584D6] bg-clip-text text-transparent text-[38px] sm:text-4xl md:text-5xl lg:text-[80px] leading-tight"
+                      <span
+                        className="font-medium bg-gradient-to-r from-[#80E5FF] to-[#7584D6] bg-clip-text text-transparent"
                         style={{
                           transform: "translateZ(20px)",
                           paddingRight: "2px",
                         }}
                       >
                         Biblo
-                      </h1>
+                      </span>
                       <div className="absolute inset-0 bg-white/30 rounded-[56px] -z-10" />
                     </motion.div>
-                  </motion.div>
-                </motion.div>
+                  </motion.span>
+                </motion.h1>
               </div>
             </div>
 
@@ -123,7 +114,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.8 }}
               className="text-[#465478] text-lg max-w-2xl break-keep my-8 mx-auto px-16 sm:px-4"
             >
-              비블로(Biblo)는 I가 이해할 수 있는 형태로 고객의 데이터를 구조화하고,{" "}<br className="hidden sm:block"></br>
+              비블로(Biblo)는 AI가 이해할 수 있는 형태로 고객의 데이터를 구조화하고,{" "}<br className="hidden sm:block"></br>
               이를 바탕으로 고품질 의미 기반 검색 환경을 구축하는 솔루션입니다.
             </motion.p>
 
