@@ -140,7 +140,7 @@ const Chat = () => {
   // WebSocket URL 생성 함수 (프로토콜 자동 감지)
   const getWebSocketUrl = (path) => {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    return `${protocol}//${window.location.host}${path}`;
+    return `${protocol}//112.219.163.139:8000${path}`;
   };
   
   // 컴포넌트 마운트 시 실행
