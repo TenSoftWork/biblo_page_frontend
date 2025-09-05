@@ -135,7 +135,7 @@ const Chat = () => {
   const userInfoCalledRef = useRef(false);
   
   // API 기본 URL 정의 (상대 경로 사용)
-  const API_BASE_URL = '112.219.163.139:8000';
+  const API_BASE_URL = 'http://112.219.163.139:8000';
   
   // WebSocket URL 생성 함수 (프로토콜 자동 감지)
   const getWebSocketUrl = (path) => {
